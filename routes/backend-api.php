@@ -1,5 +1,5 @@
 <?php
-
+// {{host}}/backend/api/
 Route::post('/login', 'LoginController@login');
 
 Route::group(['middleware' => ['auth:administrator']], function () {
@@ -193,6 +193,15 @@ Route::group(['middleware' => ['auth:administrator']], function () {
         Route::get('/{id}', 'CourseCategoryController@edit');
         Route::put('/{id}', 'CourseCategoryController@update');
         Route::delete('/{id}', 'CourseCategoryController@destroy');
+    });
+
+    // 标签
+    Route::group(['prefix' => 'courseTag'], function () {
+        Route::get('/', 'CourseTagController@index');
+        Route::post('/', 'CourseTagController@store');
+        Route::get('/{id}', 'CourseTagController@edit');
+        Route::put('/{id}', 'CourseTagController@update');
+        Route::delete('/{id}', 'CourseTagController@destroy');
     });
 
     // 插件

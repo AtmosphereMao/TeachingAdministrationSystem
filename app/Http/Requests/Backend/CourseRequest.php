@@ -12,6 +12,7 @@
 namespace App\Http\Requests\Backend;
 
 use App\Models\Course;
+use GuzzleHttp\Promise\Coroutine;
 use Overtrue\Pinyin\Pinyin;
 
 class CourseRequest extends BaseRequest
@@ -40,6 +41,7 @@ class CourseRequest extends BaseRequest
             'original_desc' => 'required',
             'published_at' => 'required',
             'category_id' => 'required',
+            'tag_id' => 'required',
         ];
     }
 
@@ -71,7 +73,9 @@ class CourseRequest extends BaseRequest
             'published_at' => $this->input('published_at'),
             'is_show' => $this->input('is_show', Course::SHOW_NO),
             'is_rec' => $this->input('is_rec', Course::REC_NO),
+
         ];
+
 
         if ($this->isMethod('post')) {
             $slug = implode('-', (new Pinyin())->convert($this->input('title')));
@@ -79,5 +83,10 @@ class CourseRequest extends BaseRequest
         }
 
         return $data;
+    }
+    public function getTagsId(){
+        $tag_link_datas = $this->input('tag_id');
+        $tag_link_datas = json_decode($tag_link_datas);
+        return $tag_link_datas;
     }
 }

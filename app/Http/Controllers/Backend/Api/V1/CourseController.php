@@ -17,6 +17,7 @@ use App\Services\Course\Models\Video;
 use App\Services\Course\Models\Course;
 use App\Http\Requests\Backend\CourseRequest;
 use App\Services\Course\Models\CourseCategory;
+use App\Services\Course\Models\CourseTagLink;
 
 class CourseController extends BaseController
 {
@@ -49,7 +50,14 @@ class CourseController extends BaseController
 
     public function store(CourseRequest $request, Course $course)
     {
-        $course->fill($request->filldata())->save();
+        $data = $request->filldata();
+        $tags = $request->getTagsId();
+//        $course->fill($data)->save();
+        $id = Course::insertGetId($data);
+
+        foreach ($tags as $item){
+            CourseTagLink::create(['tag_id'=>$item, 'course_id'=>$id]);
+        }
 
         return $this->success();
     }

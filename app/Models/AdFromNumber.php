@@ -23,7 +23,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \App\Models\AdFrom              $adFrom
- *
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\AdFromNumber newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\AdFromNumber newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\AdFromNumber query()

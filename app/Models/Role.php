@@ -27,7 +27,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Illuminate\Support\Carbon|null                      $updated_at
  * @property int                                                  $is_show     0不显示,1显示
  * @property \Illuminate\Database\Eloquent\Collection|\App\User[] $users
- *
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Role newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Role newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Role query()
@@ -42,6 +41,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Role whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Role whereWeight($value)
  * @mixin \Eloquent
+ * @property-read int|null $users_count
  */
 class Role extends Model
 {

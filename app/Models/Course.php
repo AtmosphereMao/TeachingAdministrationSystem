@@ -40,7 +40,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property \Illuminate\Database\Eloquent\Collection|\App\Models\CourseComment[] $comments
  * @property \App\User $user
  * @property \Illuminate\Database\Eloquent\Collection|\App\Models\Video[] $videos
- *
  * @method static bool|null forceDelete()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Course keywords($keywords)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Course newModelQuery()
@@ -69,6 +68,20 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Course withTrashed()
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Course withoutTrashed()
  * @mixin \Eloquent
+ * @property string $original_desc 简介原始内容
+ * @property string $render_desc 简介渲染后的内容
+ * @property int $category_id 分类id
+ * @property int $is_rec 推荐,0否,1是
+ * @property int $user_count 学习人数
+ * @property-read int|null $buy_users_count
+ * @property-read int|null $chapters_count
+ * @property-read int|null $comments_count
+ * @property-read int|null $videos_count
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Course whereCategoryId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Course whereIsRec($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Course whereOriginalDesc($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Course whereRenderDesc($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Course whereUserCount($value)
  */
 class Course extends Model
 {

@@ -14,6 +14,35 @@ namespace App\Services\Member\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+/**
+ * App\Services\Member\Models\UserInviteBalanceRecord
+ *
+ * @property int $id
+ * @property int $user_id
+ * @property int $type 0邀请奖励
+ * @property int $total
+ * @property string $desc
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @method static bool|null forceDelete()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Services\Member\Models\UserInviteBalanceRecord newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Services\Member\Models\UserInviteBalanceRecord newQuery()
+ * @method static \Illuminate\Database\Query\Builder|\App\Services\Member\Models\UserInviteBalanceRecord onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Services\Member\Models\UserInviteBalanceRecord query()
+ * @method static bool|null restore()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Services\Member\Models\UserInviteBalanceRecord whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Services\Member\Models\UserInviteBalanceRecord whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Services\Member\Models\UserInviteBalanceRecord whereDesc($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Services\Member\Models\UserInviteBalanceRecord whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Services\Member\Models\UserInviteBalanceRecord whereTotal($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Services\Member\Models\UserInviteBalanceRecord whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Services\Member\Models\UserInviteBalanceRecord whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Services\Member\Models\UserInviteBalanceRecord whereUserId($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Services\Member\Models\UserInviteBalanceRecord withTrashed()
+ * @method static \Illuminate\Database\Query\Builder|\App\Services\Member\Models\UserInviteBalanceRecord withoutTrashed()
+ * @mixin \Eloquent
+ */
 class UserInviteBalanceRecord extends Model
 {
     use SoftDeletes;

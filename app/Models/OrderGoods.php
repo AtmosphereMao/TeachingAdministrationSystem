@@ -29,7 +29,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property mixed                           $goods_name
  * @property \App\Models\Order               $order
  * @property \App\User                       $user
- *
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\OrderGoods newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\OrderGoods newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\OrderGoods query()
@@ -43,6 +42,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\OrderGoods whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\OrderGoods whereUserId($value)
  * @mixin \Eloquent
+ * @property int $oid 订单id
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\OrderGoods whereOid($value)
  */
 class OrderGoods extends Model
 {

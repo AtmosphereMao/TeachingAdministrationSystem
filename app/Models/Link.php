@@ -24,7 +24,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property mixed                           $destroy_url
  * @property mixed                           $edit_url
- *
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Link newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Link newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Link query()

@@ -15,6 +15,43 @@ use App\User;
 use Illuminate\Database\Eloquent\Model;
 use App\Services\Base\Services\ConfigService;
 
+/**
+ * App\Services\Order\Models\Order
+ *
+ * @property int $id
+ * @property int $user_id
+ * @property int $charge
+ * @property int $status 1未处理,9已处理
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property string|null $deleted_at
+ * @property string $order_id 订单编号
+ * @property string $payment 支付网关
+ * @property string $payment_method 支付方式
+ * @property-read mixed $continue_pay
+ * @property-read mixed $payment_text
+ * @property-read mixed $status_text
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Services\Order\Models\OrderGoods[] $goods
+ * @property-read int|null $goods_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Services\Order\Models\OrderPaidRecord[] $paidRecords
+ * @property-read int|null $paid_records_count
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Services\Order\Models\Order keywords($keywords)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Services\Order\Models\Order newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Services\Order\Models\Order newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Services\Order\Models\Order query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Services\Order\Models\Order status($status)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Services\Order\Models\Order whereCharge($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Services\Order\Models\Order whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Services\Order\Models\Order whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Services\Order\Models\Order whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Services\Order\Models\Order whereOrderId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Services\Order\Models\Order wherePayment($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Services\Order\Models\Order wherePaymentMethod($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Services\Order\Models\Order whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Services\Order\Models\Order whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Services\Order\Models\Order whereUserId($value)
+ * @mixin \Eloquent
+ */
 class Order extends Model
 {
     const STATUS_UNPAY = 1;

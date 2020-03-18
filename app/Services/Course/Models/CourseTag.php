@@ -13,6 +13,27 @@ namespace App\Services\Course\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\Services\Course\Models\CourseTag
+ *
+ * @property int $id
+ * @property string $name 标签名
+ * @property int $is_show 是否显示,1显示,0不显示
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property string|null $deleted_at
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Services\Course\Models\CourseTag newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Services\Course\Models\CourseTag newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Services\Course\Models\CourseTag query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Services\Course\Models\CourseTag show()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Services\Course\Models\CourseTag whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Services\Course\Models\CourseTag whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Services\Course\Models\CourseTag whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Services\Course\Models\CourseTag whereIsShow($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Services\Course\Models\CourseTag whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Services\Course\Models\CourseTag whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
 class CourseTag extends Model
 {
     protected $table = 'course_tags';

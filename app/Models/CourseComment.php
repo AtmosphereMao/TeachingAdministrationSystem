@@ -27,7 +27,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string|null                     $deleted_at
  * @property \App\Models\Course              $course
  * @property \App\User                       $user
- *
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\CourseComment des()
  * @method static bool|null forceDelete()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\CourseComment newModelQuery()
@@ -45,6 +44,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Query\Builder|\App\Models\CourseComment withTrashed()
  * @method static \Illuminate\Database\Query\Builder|\App\Models\CourseComment withoutTrashed()
  * @mixin \Eloquent
+ * @property string $original_content 原始内容
+ * @property string $render_content 渲染后的内容
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\CourseComment whereOriginalContent($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\CourseComment whereRenderContent($value)
  */
 class CourseComment extends Model
 {

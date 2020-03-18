@@ -30,7 +30,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property mixed                                                             $status_text
  * @property \Illuminate\Database\Eloquent\Collection|\App\Models\OrderGoods[] $goods
  * @property \App\User                                                         $user
- *
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Order keywords($keywords)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Order newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Order newQuery()
@@ -47,6 +46,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Order whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Order whereUserId($value)
  * @mixin \Eloquent
+ * @property-read mixed $continue_pay
+ * @property-read int|null $goods_count
  */
 class Order extends Model
 {

@@ -27,7 +27,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \App\Models\Role                $role
  * @property \App\User                       $user
- *
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\UserJoinRoleRecord newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\UserJoinRoleRecord newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\UserJoinRoleRecord query()

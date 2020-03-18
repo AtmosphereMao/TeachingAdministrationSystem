@@ -27,7 +27,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string|null                     $deleted_at
  * @property \App\User                       $user
  * @property \App\Models\Video               $video
- *
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\VideoComment des()
  * @method static bool|null forceDelete()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\VideoComment newModelQuery()
@@ -45,6 +44,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Query\Builder|\App\Models\VideoComment withTrashed()
  * @method static \Illuminate\Database\Query\Builder|\App\Models\VideoComment withoutTrashed()
  * @mixin \Eloquent
+ * @property string $original_content 原始内容
+ * @property string $render_content 渲染后的内容
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\VideoComment whereOriginalContent($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\VideoComment whereRenderContent($value)
  */
 class VideoComment extends Model
 {

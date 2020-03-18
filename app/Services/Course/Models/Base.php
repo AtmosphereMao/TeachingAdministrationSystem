@@ -13,6 +13,14 @@ namespace App\Services\Course\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\Services\Course\Models\Base
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Services\Course\Models\Base newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Services\Course\Models\Base newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Services\Course\Models\Base query()
+ * @mixin \Eloquent
+ */
 class Base extends Model
 {
     /**

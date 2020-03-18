@@ -45,7 +45,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Illuminate\Database\Eloquent\Collection|\App\Models\VideoComment[] $comments
  * @property \App\Models\Course                                                  $course
  * @property \App\User                                                           $user
- *
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Video newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Video newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Video published()
@@ -73,6 +72,12 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Video whereUserId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Video whereViewNum($value)
  * @mixin \Eloquent
+ * @property string $original_desc 简介原始内容
+ * @property string $render_desc 简介渲染后的内容
+ * @property-read int|null $buy_users_count
+ * @property-read int|null $comments_count
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Video whereOriginalDesc($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Video whereRenderDesc($value)
  */
 class Video extends Model
 {

@@ -13,6 +13,69 @@ namespace App\Services\Course\Models;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+/**
+ * App\Services\Course\Models\Course
+ *
+ * @property int $id
+ * @property int $user_id
+ * @property string $title 名
+ * @property string $slug slug
+ * @property string $thumb 封面
+ * @property int $charge 收费
+ * @property string $short_description 简短介绍
+ * @property string $original_desc 简介原始内容
+ * @property string $render_desc 简介渲染后的内容
+ * @property string $seo_keywords SEO关键字
+ * @property string $seo_description SEO描述
+ * @property string|null $published_at 上线时间
+ * @property int $is_show 1显示,-1隐藏
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property int $category_id 分类id
+ * @property int $is_rec 推荐,0否,1是
+ * @property int $user_count 学习人数
+ * @property-read \App\Services\Course\Models\CourseCategory $category
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Services\Course\Models\CourseChapter[] $chapters
+ * @property-read int|null $chapters_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Services\Course\Models\CourseComment[] $comments
+ * @property-read int|null $comments_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Services\Course\Models\Video[] $videos
+ * @property-read int|null $videos_count
+ * @method static bool|null forceDelete()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Services\Course\Models\Course keywords($keywords)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Services\Course\Models\Course newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Services\Course\Models\Course newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Services\Course\Models\Course notShow()
+ * @method static \Illuminate\Database\Query\Builder|\App\Services\Course\Models\Course onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Services\Course\Models\Course published()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Services\Course\Models\Course query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Services\Course\Models\Course recommend()
+ * @method static bool|null restore()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Services\Course\Models\Course show()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Services\Course\Models\Course whereCategoryId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Services\Course\Models\Course whereCharge($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Services\Course\Models\Course whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Services\Course\Models\Course whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Services\Course\Models\Course whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Services\Course\Models\Course whereIsRec($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Services\Course\Models\Course whereIsShow($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Services\Course\Models\Course whereOriginalDesc($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Services\Course\Models\Course wherePublishedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Services\Course\Models\Course whereRenderDesc($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Services\Course\Models\Course whereSeoDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Services\Course\Models\Course whereSeoKeywords($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Services\Course\Models\Course whereShortDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Services\Course\Models\Course whereSlug($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Services\Course\Models\Course whereThumb($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Services\Course\Models\Course whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Services\Course\Models\Course whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Services\Course\Models\Course whereUserCount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Services\Course\Models\Course whereUserId($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Services\Course\Models\Course withTrashed()
+ * @method static \Illuminate\Database\Query\Builder|\App\Services\Course\Models\Course withoutTrashed()
+ * @mixin \Eloquent
+ */
 class Course extends Base
 {
     use SoftDeletes;

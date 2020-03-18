@@ -25,7 +25,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \App\User                       $user
- *
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Socialite newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Socialite newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Socialite query()

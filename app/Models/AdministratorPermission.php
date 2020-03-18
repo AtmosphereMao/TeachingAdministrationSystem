@@ -27,7 +27,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property mixed                                                                    $destroy_url
  * @property mixed                                                                    $edit_url
  * @property \Illuminate\Database\Eloquent\Collection|\App\Models\AdministratorRole[] $roles
- *
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\AdministratorPermission newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\AdministratorPermission newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\AdministratorPermission query()
@@ -40,6 +39,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\AdministratorPermission whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\AdministratorPermission whereUrl($value)
  * @mixin \Eloquent
+ * @property-read int|null $roles_count
  */
 class AdministratorPermission extends Model
 {

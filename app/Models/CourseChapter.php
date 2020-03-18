@@ -25,7 +25,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property int                                                          $sort
  * @property \App\Models\Course                                           $course
  * @property \Illuminate\Database\Eloquent\Collection|\App\Models\Video[] $videos
- *
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\CourseChapter newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\CourseChapter newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\CourseChapter query()
@@ -36,6 +35,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\CourseChapter whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\CourseChapter whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property-read int|null $videos_count
  */
 class CourseChapter extends Model
 {

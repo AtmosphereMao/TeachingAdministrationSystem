@@ -25,7 +25,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property string                          $thumb
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- *
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Template newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Template newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Template query()

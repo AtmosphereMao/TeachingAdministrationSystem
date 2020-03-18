@@ -23,7 +23,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property string                          $url        链接地址
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- *
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Nav newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Nav newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Nav query()

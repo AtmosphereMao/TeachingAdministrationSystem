@@ -22,7 +22,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null                     $response_data 响应数据
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- *
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\SmsRecord newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\SmsRecord newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\SmsRecord query()

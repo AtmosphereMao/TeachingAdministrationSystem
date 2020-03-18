@@ -22,7 +22,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Illuminate\Support\Carbon|null                                     $created_at
  * @property \Illuminate\Support\Carbon|null                                     $updated_at
  * @property \Illuminate\Database\Eloquent\Collection|\App\Models\AdFromNumber[] $numbers
- *
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\AdFrom newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\AdFrom newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\AdFrom query()
@@ -32,6 +31,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\AdFrom whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\AdFrom whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property-read int|null $numbers_count
  */
 class AdFrom extends Model
 {

@@ -29,7 +29,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property mixed                                                                    $edit_url
  * @property \App\Models\AdministratorMenu                                            $parent
  * @property \App\Models\AdministratorPermission                                      $permission
- *
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\AdministratorMenu newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\AdministratorMenu newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\AdministratorMenu notSuper()
@@ -45,6 +44,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\AdministratorMenu whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\AdministratorMenu whereUrl($value)
  * @mixin \Eloquent
+ * @property-read int|null $children_count
  */
 class AdministratorMenu extends Model
 {

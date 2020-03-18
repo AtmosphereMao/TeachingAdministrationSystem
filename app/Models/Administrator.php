@@ -33,7 +33,6 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @property mixed                                                                                                     $edit_url
  * @property \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
  * @property \Illuminate\Database\Eloquent\Collection|\App\Models\AdministratorRole[]                                  $roles
- *
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Administrator newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Administrator newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Administrator query()
@@ -47,6 +46,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Administrator whereRememberToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Administrator whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property-read int|null $notifications_count
+ * @property-read int|null $roles_count
  */
 class Administrator extends Authenticatable implements JWTSubject
 {

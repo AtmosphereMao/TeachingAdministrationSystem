@@ -13,6 +13,36 @@ namespace App\Services\Order\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\Services\Order\Models\OrderGoods
+ *
+ * @property int $id
+ * @property int $oid 订单id
+ * @property int $user_id
+ * @property string $order_id 订单编号
+ * @property int $goods_id 商品ID
+ * @property string $goods_type 商品类型标识符
+ * @property int $num 商品数量
+ * @property int $charge 商品价格
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read mixed $goods_text
+ * @property-read \App\Services\Order\Models\Order $order
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Services\Order\Models\OrderGoods newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Services\Order\Models\OrderGoods newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Services\Order\Models\OrderGoods query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Services\Order\Models\OrderGoods whereCharge($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Services\Order\Models\OrderGoods whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Services\Order\Models\OrderGoods whereGoodsId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Services\Order\Models\OrderGoods whereGoodsType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Services\Order\Models\OrderGoods whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Services\Order\Models\OrderGoods whereNum($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Services\Order\Models\OrderGoods whereOid($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Services\Order\Models\OrderGoods whereOrderId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Services\Order\Models\OrderGoods whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Services\Order\Models\OrderGoods whereUserId($value)
+ * @mixin \Eloquent
+ */
 class OrderGoods extends Model
 {
     const GOODS_TYPE_COURSE = 'COURSE';

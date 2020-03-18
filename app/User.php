@@ -60,7 +60,6 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @property \Illuminate\Database\Eloquent\Collection|\App\Models\Socialite[] $socialite
  * @property \Illuminate\Database\Eloquent\Collection|\Laravel\Passport\Token[] $tokens
  * @property \Illuminate\Database\Eloquent\Collection|\App\Models\VideoComment[] $videoComments
- *
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User createdAtBetween($startDate, $endDate)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User newQuery()
@@ -81,6 +80,32 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereRoleId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property string $email
+ * @property int $invite_balance 邀请奖励余额
+ * @property int $invite_user_id 邀请人id
+ * @property string|null $invite_user_expired_at 邀请过期时间
+ * @property int $is_password_set 密码是否配置,0否,1是
+ * @property int $is_set_nickname 配置昵称,1是,0否
+ * @property string $activity_token 激活验证token
+ * @property string $activity_expire 激活过期时间
+ * @property int $is_activity 是否激活1是，0否
+ * @property-read int|null $buy_videos_count
+ * @property-read int|null $course_comments_count
+ * @property-read int|null $courses_count
+ * @property-read int|null $join_courses_count
+ * @property-read int|null $join_roles_count
+ * @property-read int|null $notifications_count
+ * @property-read int|null $orders_count
+ * @property-read int|null $socialite_count
+ * @property-read int|null $video_comments_count
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereActivityExpire($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereActivityToken($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereInviteBalance($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereInviteUserExpiredAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereInviteUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereIsActivity($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereIsPasswordSet($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereIsSetNickname($value)
  */
 class User extends Authenticatable
 {

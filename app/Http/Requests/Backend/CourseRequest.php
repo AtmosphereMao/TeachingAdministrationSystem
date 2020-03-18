@@ -85,8 +85,8 @@ class CourseRequest extends BaseRequest
         return $data;
     }
     public function getTagsId(){
-        $tag_link_datas = $this->input('tag_id');
-        $tag_link_datas = json_decode($tag_link_datas);
-        return $tag_link_datas;
+//        $tag_link_datas = $this->input('tag_id');
+//        $tag_link_datas = json_decode($tag_link_datas);
+        return $this->input('tag_id');
     }
 }

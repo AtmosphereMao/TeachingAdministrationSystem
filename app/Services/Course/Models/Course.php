@@ -132,4 +132,12 @@ class Course extends Base
     {
         return $this->belongsTo(CourseCategory::class, 'category_id');
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function tag()
+    {
+        return $this->hasMany(CourseTagLink::class, 'course_id');
+    }
 }

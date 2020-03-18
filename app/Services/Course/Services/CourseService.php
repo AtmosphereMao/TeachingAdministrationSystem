@@ -13,6 +13,8 @@ namespace App\Services\Course\Services;
 
 use App\Constant\FrontendConstant;
 use App\Services\Course\Models\Course;
+use App\Services\Course\Models\CourseTag;
+use App\Services\Course\Models\CourseTagLink;
 use App\Services\Base\Services\ConfigService;
 use App\Services\Course\Models\CourseChapter;
 use App\Services\Course\Models\CourseUserRecord;
@@ -59,9 +61,10 @@ class CourseService implements CourseServiceInterface
      * @return array
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
-    public function simplePage(int $page, int $pageSize, int $categoryId = 0, string $scene = ''): array
+    public function simplePage(int $page, int $pageSize, int $categoryId = 0, int $tagId = 0, string $scene = ''): array
     {
-        $query = Course::with(['category'])
+        // 分类
+        $query = Course::with(['category','tag'])
             ->show()->published()
             ->withCount(['videos' => function ($query) {
                 $query->show()->published();
@@ -69,6 +72,8 @@ class CourseService implements CourseServiceInterface
             ->when($categoryId, function ($query) use ($categoryId) {
                 $query->where('category_id', $categoryId);
             });
+
+        // 课程
         if (!$scene) {
             $query->orderByDesc('published_at');
         } elseif ($scene == 'sub') {
@@ -76,8 +81,16 @@ class CourseService implements CourseServiceInterface
         } elseif ($scene == 'recom') {
             $query->whereIsRec(FrontendConstant::YES)->orderByDesc('id');
         }
+
+        // 标签
+        if($tagId){
+            $tagCourseId = CourseTagLink::where('tag_id',$tagId)->get('course_id')->toArray();
+            $query->whereIn('id',$tagCourseId);
+        }
+
         $total = $query->count();
         $list = $query->forPage($page, $pageSize)->get()->toArray();
+//        dd($list);
         $list = $this->addLatestVideos($list);
 
         return compact('list', 'total');

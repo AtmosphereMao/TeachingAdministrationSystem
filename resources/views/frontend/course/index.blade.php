@@ -25,6 +25,14 @@
                            class="category-box-item {{$categoryId == $category['id'] ? 'active' : ''}}">{{$category['name']}}</a>
                     @endforeach
                 </div>
+                <div class="category-box">
+                    <a href="{{route('courses')}}?{{$queryParams(['tag_id' => 0])}}"
+                       class="category-box-item {{!$tagId ? 'active' : ''}}">不限</a>
+                    @foreach($courseTags as $tag)
+                        <a href="{{route('courses')}}?{{$queryParams(['tag_id' => $tag['id']])}}"
+                           class="category-box-item {{$tagId == $tag['id'] ? 'active' : ''}}">{{$tag['name']}}</a>
+                    @endforeach
+                </div>
             </div>
 
             <div class="col-12">

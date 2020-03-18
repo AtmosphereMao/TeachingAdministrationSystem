@@ -30,6 +30,7 @@ use App\Services\Course\Interfaces\VideoServiceInterface;
 use App\Services\Course\Interfaces\CourseServiceInterface;
 use App\Services\Course\Interfaces\CourseCommentServiceInterface;
 use App\Services\Course\Interfaces\CourseCategoryServiceInterface;
+use App\Services\Course\Interfaces\CourseTagServiceInterface;
 
 class CourseController extends FrontendController
 {
@@ -62,6 +63,10 @@ class CourseController extends FrontendController
      */
     protected $courseCategoryService;
     /**
+     * @var CourseCategoryService
+     */
+    protected $courseTagService;
+    /**
      * @var BusinessState
      */
     protected $businessState;
@@ -74,6 +79,7 @@ class CourseController extends FrontendController
         VideoServiceInterface $videoService,
         OrderServiceInterface $orderService,
         CourseCategoryServiceInterface $courseCategoryService,
+        CourseTagServiceInterface $courseTagService,
         BusinessState $businessState
     ) {
         $this->courseService = $courseService;
@@ -83,19 +89,21 @@ class CourseController extends FrontendController
         $this->videoService = $videoService;
         $this->orderService = $orderService;
         $this->courseCategoryService = $courseCategoryService;
+        $this->courseTagService = $courseTagService;
         $this->businessState = $businessState;
     }
 
     public function index(Request $request)
     {
         $categoryId = (int)$request->input('category_id');
+        $tagId = (int)$request->input('tag_id');
         $scene = $request->input('scene', '');
         $page = $request->input('page', 1);
         $pageSize = $this->configService->getCourseListPageSize();
         [
             'total' => $total,
             'list' => $list
-        ] = $this->courseService->simplePage($page, $pageSize, $categoryId, $scene);
+        ] = $this->courseService->simplePage($page, $pageSize, $categoryId, $tagId, $scene);
         $courses = $this->paginator($list, $total, $page, $pageSize);
         $courses->appends([
             'category_id' => $categoryId,
@@ -107,7 +115,8 @@ class CourseController extends FrontendController
             'description' => $description,
         ] = $this->configService->getSeoCourseListPage();
         $courseCategories = $this->courseCategoryService->all();
-
+        $courseTags = $this->courseTagService->all();
+//        dd($courseTags);
         $queryParams = function ($param) {
             $request = \request();
             $params = [
@@ -125,9 +134,11 @@ class CourseController extends FrontendController
             'keywords',
             'description',
             'courseCategories',
+            'courseTags',
             'categoryId',
             'scene',
-            'queryParams'
+            'queryParams',
+            'tagId'
         ));
     }
 

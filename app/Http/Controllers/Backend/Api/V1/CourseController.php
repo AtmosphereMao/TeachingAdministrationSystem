@@ -54,7 +54,10 @@ class CourseController extends BaseController
         $tags = $request->getTagsId();
 //        $course->fill($data)->save();
         $id = Course::insertGetId($data);
-
+        $b = [2,5,6];   // tags_link
+        $a = [2,4,6]; //tags
+        dd(array_diff($a,$b));
+//        dd($tags);
         foreach ($tags as $item){
             CourseTagLink::create(['tag_id'=>$item, 'course_id'=>$id]);
         }
@@ -65,7 +68,13 @@ class CourseController extends BaseController
     public function edit($id)
     {
         $course = Course::findOrFail($id);
-
+        $tagId = CourseTagLink::query()->where(['course_id'=>$id])->get();
+        $temp = [];
+        foreach ($tagId as $item) {
+            array_push($temp,$item->id);
+        }
+        $course->setAttribute('tag_id',$temp);
+//        dd($course);
         return $this->successData($course);
     }
 
@@ -76,8 +85,28 @@ class CourseController extends BaseController
          * @var Course
          */
         $course = Course::findOrFail($id);
+
+        // 标签
+        $tags = $request->getTagsId();
+        $tags_table_temp = [];
+        $tags_table = CourseTagLink::query()->where('course_id',$id)->select(['id','tag_id'])->get();
+        if($tags_table) {$tags_table = $tags_table->toArray();}
+        // 删除
+        foreach ($tags_table as $item){
+            if(in_array($item['tag_id'],$tags)){
+                array_push($tags_table_temp,$item['tag_id']);
+                continue;}
+            CourseTagLink::query()->findOrFail($item['id'])->delete();
+        }
+        // 创建
+        $tags_table_temp = array_diff($tags,$tags_table_temp);
+        foreach ($tags_table_temp as $item){
+            CourseTagLink::create(['tag_id'=>$item, 'course_id'=>$id]);
+        }
+
         $originIsShow = $course->is_show;
         $course->fill($data)->save();
+
 
         // 判断是否修改了显示的状态
         if ($originIsShow != $data['is_show']) {
@@ -95,7 +124,7 @@ class CourseController extends BaseController
             return $this->error(BackendApiConstant::COURSE_BAN_DELETE_FOR_VIDEOS);
         }
         $course->delete();
-
+        CourseTagLink::query()->where('course_id',$id)->delete();
         return $this->success();
     }
 }

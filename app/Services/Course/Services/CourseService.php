@@ -57,11 +57,12 @@ class CourseService implements CourseServiceInterface
      * @param int $page
      * @param int $pageSize
      * @param int $categoryId
+     * @param array $tagId
      * @param string $scene
      * @return array
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
-    public function simplePage(int $page, int $pageSize, int $categoryId = 0, int $tagId = 0, string $scene = ''): array
+    public function simplePage(int $page, int $pageSize, int $categoryId = 0, array $tagId = [0], string $scene = ''): array
     {
         // 分类
         $query = Course::with(['category','tag'])
@@ -83,8 +84,8 @@ class CourseService implements CourseServiceInterface
         }
 
         // 标签
-        if($tagId){
-            $tagCourseId = CourseTagLink::where('tag_id',$tagId)->get('course_id')->toArray();
+        if(!in_array(0,$tagId)){
+            $tagCourseId = CourseTagLink::whereIn('tag_id',$tagId)->get('course_id')->toArray();
             $query->whereIn('id',$tagCourseId);
         }
 

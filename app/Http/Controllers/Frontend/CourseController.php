@@ -11,6 +11,7 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use function Couchbase\defaultDecoder;
 use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
 use App\Businesses\BusinessState;
@@ -21,6 +22,7 @@ use App\Services\Member\Services\UserService;
 use App\Services\Order\Services\OrderService;
 use App\Services\Course\Services\VideoService;
 use App\Services\Course\Services\CourseService;
+use App\Services\Course\Services\CourseTagService;
 use App\Services\Course\Services\CourseCommentService;
 use App\Services\Course\Services\CourseCategoryService;
 use App\Services\Base\Interfaces\ConfigServiceInterface;
@@ -63,7 +65,7 @@ class CourseController extends FrontendController
      */
     protected $courseCategoryService;
     /**
-     * @var CourseCategoryService
+     * @var CourseTagService
      */
     protected $courseTagService;
     /**
@@ -96,7 +98,7 @@ class CourseController extends FrontendController
     public function index(Request $request)
     {
         $categoryId = (int)$request->input('category_id');
-        $tagId = (int)$request->input('tag_id');
+        $tagId = (array)$request->input('tag_id',[0]);
         $scene = $request->input('scene', '');
         $page = $request->input('page', 1);
         $pageSize = $this->configService->getCourseListPageSize();
@@ -123,8 +125,19 @@ class CourseController extends FrontendController
                 'page' => $request->input('page'),
                 'category_id' => $request->input('category_id', 0),
                 'scene' => $request->input('scene', ''),
+                'tag_id' => $request->input('tag_id', [0]),
             ];
-            $params = array_merge($params, $param);
+            if (array_key_exists('tag_id',$param)) {
+                if(in_array(0,$param['tag_id']) || in_array(0,$params['tag_id'])){
+                    $params = array_merge($params, $param);
+                }elseif(array_intersect($params['tag_id'],$param['tag_id'])){
+                    $params['tag_id'] = array_diff($params['tag_id'], $param['tag_id']);
+                }
+                else{
+                    $params = array_merge_recursive($params, $param);
+                }
+            }else{
+                $params = array_merge($params, $param);}
             return http_build_query($params);
         };
 

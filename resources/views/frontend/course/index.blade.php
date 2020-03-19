@@ -26,11 +26,13 @@
                     @endforeach
                 </div>
                 <div class="category-box">
-                    <a href="{{route('courses')}}?{{$queryParams(['tag_id' => 0])}}"
-                       class="category-box-item {{!$tagId ? 'active' : ''}}">不限</a>
+                    <a href="{{route('courses')}}?{{$queryParams(['tag_id' => [0]])}}"
+                       class="category-box-item {{in_array(0,$tagId) ? 'active' : ''}}">不限</a>
                     @foreach($courseTags as $tag)
-                        <a href="{{route('courses')}}?{{$queryParams(['tag_id' => $tag['id']])}}"
-                           class="category-box-item {{$tagId == $tag['id'] ? 'active' : ''}}">{{$tag['name']}}</a>
+                        {{--@if(in_array($tag['id'],$tagId))--}}
+                            <a href="{{route('courses')}}?{{$queryParams(['tag_id' => [$tag['id']]])}}"
+                               class="category-box-item {{in_array($tag['id'],$tagId) ? 'active' : ''}}">{{$tag['name']}}</a>
+                        {{--@endif--}}
                     @endforeach
                 </div>
             </div>

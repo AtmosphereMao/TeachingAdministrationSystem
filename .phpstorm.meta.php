@@ -5,7 +5,7 @@ namespace PHPSTORM_META {
 
    /**
     * PhpStorm Meta file, to provide autocomplete information for PhpStorm
-    * Generated on 2020-03-18 10:33:43.
+    * Generated on 2020-03-18 11:01:43.
     *
     * @author Barry vd. Heuvel <barryvdh@gmail.com>
     * @see https://github.com/barryvdh/laravel-ide-helper
@@ -135,6 +135,7 @@ namespace PHPSTORM_META {
         'migration.creator' => \Illuminate\Database\Migrations\MigrationCreator::class,
         'migration.repository' => \Illuminate\Database\Migrations\DatabaseMigrationRepository::class,
         'migrator' => \Illuminate\Database\Migrations\Migrator::class,
+        'pay.wechat' => \Yansongda\Pay\Gateways\Wechat::class,
         'purifier' => \Mews\Purifier\Purifier::class,
         'qrcode' => \SimpleSoftwareIO\QrCode\BaconQrCodeGenerator::class,
         'queue' => \Illuminate\Queue\QueueManager::class,
@@ -297,6 +298,7 @@ namespace PHPSTORM_META {
         'migration.creator' => \Illuminate\Database\Migrations\MigrationCreator::class,
         'migration.repository' => \Illuminate\Database\Migrations\DatabaseMigrationRepository::class,
         'migrator' => \Illuminate\Database\Migrations\Migrator::class,
+        'pay.wechat' => \Yansongda\Pay\Gateways\Wechat::class,
         'purifier' => \Mews\Purifier\Purifier::class,
         'qrcode' => \SimpleSoftwareIO\QrCode\BaconQrCodeGenerator::class,
         'queue' => \Illuminate\Queue\QueueManager::class,
@@ -459,6 +461,7 @@ namespace PHPSTORM_META {
         'migration.creator' => \Illuminate\Database\Migrations\MigrationCreator::class,
         'migration.repository' => \Illuminate\Database\Migrations\DatabaseMigrationRepository::class,
         'migrator' => \Illuminate\Database\Migrations\Migrator::class,
+        'pay.wechat' => \Yansongda\Pay\Gateways\Wechat::class,
         'purifier' => \Mews\Purifier\Purifier::class,
         'qrcode' => \SimpleSoftwareIO\QrCode\BaconQrCodeGenerator::class,
         'queue' => \Illuminate\Queue\QueueManager::class,
@@ -621,6 +624,7 @@ namespace PHPSTORM_META {
         'migration.creator' => \Illuminate\Database\Migrations\MigrationCreator::class,
         'migration.repository' => \Illuminate\Database\Migrations\DatabaseMigrationRepository::class,
         'migrator' => \Illuminate\Database\Migrations\Migrator::class,
+        'pay.wechat' => \Yansongda\Pay\Gateways\Wechat::class,
         'purifier' => \Mews\Purifier\Purifier::class,
         'qrcode' => \SimpleSoftwareIO\QrCode\BaconQrCodeGenerator::class,
         'queue' => \Illuminate\Queue\QueueManager::class,
@@ -783,6 +787,7 @@ namespace PHPSTORM_META {
         'migration.creator' => \Illuminate\Database\Migrations\MigrationCreator::class,
         'migration.repository' => \Illuminate\Database\Migrations\DatabaseMigrationRepository::class,
         'migrator' => \Illuminate\Database\Migrations\Migrator::class,
+        'pay.wechat' => \Yansongda\Pay\Gateways\Wechat::class,
         'purifier' => \Mews\Purifier\Purifier::class,
         'qrcode' => \SimpleSoftwareIO\QrCode\BaconQrCodeGenerator::class,
         'queue' => \Illuminate\Queue\QueueManager::class,
@@ -945,6 +950,7 @@ namespace PHPSTORM_META {
         'migration.creator' => \Illuminate\Database\Migrations\MigrationCreator::class,
         'migration.repository' => \Illuminate\Database\Migrations\DatabaseMigrationRepository::class,
         'migrator' => \Illuminate\Database\Migrations\Migrator::class,
+        'pay.wechat' => \Yansongda\Pay\Gateways\Wechat::class,
         'purifier' => \Mews\Purifier\Purifier::class,
         'qrcode' => \SimpleSoftwareIO\QrCode\BaconQrCodeGenerator::class,
         'queue' => \Illuminate\Queue\QueueManager::class,
@@ -1107,6 +1113,7 @@ namespace PHPSTORM_META {
         'migration.creator' => \Illuminate\Database\Migrations\MigrationCreator::class,
         'migration.repository' => \Illuminate\Database\Migrations\DatabaseMigrationRepository::class,
         'migrator' => \Illuminate\Database\Migrations\Migrator::class,
+        'pay.wechat' => \Yansongda\Pay\Gateways\Wechat::class,
         'purifier' => \Mews\Purifier\Purifier::class,
         'qrcode' => \SimpleSoftwareIO\QrCode\BaconQrCodeGenerator::class,
         'queue' => \Illuminate\Queue\QueueManager::class,
@@ -1269,6 +1276,7 @@ namespace PHPSTORM_META {
         'migration.creator' => \Illuminate\Database\Migrations\MigrationCreator::class,
         'migration.repository' => \Illuminate\Database\Migrations\DatabaseMigrationRepository::class,
         'migrator' => \Illuminate\Database\Migrations\Migrator::class,
+        'pay.wechat' => \Yansongda\Pay\Gateways\Wechat::class,
         'purifier' => \Mews\Purifier\Purifier::class,
         'qrcode' => \SimpleSoftwareIO\QrCode\BaconQrCodeGenerator::class,
         'queue' => \Illuminate\Queue\QueueManager::class,

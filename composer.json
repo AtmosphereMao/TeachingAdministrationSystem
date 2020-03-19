@@ -14,6 +14,7 @@
         "ext-json": "*",
         "barryvdh/laravel-cors": "^0.11.2",
         "barryvdh/laravel-ide-helper": "^2.6",
+        "doctrine/dbal": " ~2.3",
         "erusev/parsedown": "^1.7",
         "fideloper/proxy": "^4.0",
         "jacobcyl/ali-oss-storage": "^2.1",
@@ -38,7 +39,6 @@
     },
     "require-dev": {
         "darkaonline/l5-swagger": "5.8.*",
-        "doctrine/dbal": "^2.9",
         "filp/whoops": "~2.0",
         "fzaninotto/faker": "~1.4",
         "laravel/browser-kit-testing": "^4.0",

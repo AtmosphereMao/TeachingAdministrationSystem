@@ -54,7 +54,7 @@ class CourseCategory extends Model
     ];
 
     /**
-     * @param $query
+     * @param $query Model
      * @return mixed
      */
     public function scopeShow($query)
@@ -63,7 +63,7 @@ class CourseCategory extends Model
     }
 
     /**
-     * @param $query
+     * @param $query Model
      * @return mixed
      */
     public function scopeSort($query)

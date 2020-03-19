@@ -46,7 +46,7 @@ class CourseTag extends Model
     ];
 
     /**
-     * @param $query
+     * @param $query Model
      * @return mixed
      */
     public function scopeShow($query)

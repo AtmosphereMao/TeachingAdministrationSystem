@@ -97,7 +97,7 @@ class Video extends Base
     /**
      * 作用域：显示.
      *
-     * @param $query
+     * @param $query Model
      *
      * @return mixed
      */
@@ -109,7 +109,7 @@ class Video extends Base
     /**
      * 作用域：上线的视频.
      *
-     * @param $query
+     * @param $query Model
      *
      * @return mixed
      */

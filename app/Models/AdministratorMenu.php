@@ -107,7 +107,7 @@ class AdministratorMenu extends Model
     /**
      * 作用域：根目录.
      *
-     * @param $query
+     * @param $query Model
      *
      * @return mixed
      */
@@ -119,7 +119,7 @@ class AdministratorMenu extends Model
     /**
      * 作用域：非超级管理员专属的菜单.
      *
-     * @param $query
+     * @param $query Model
      *
      * @return mixed
      */
@@ -131,7 +131,7 @@ class AdministratorMenu extends Model
     /**
      * 作用域：升序[order].
      *
-     * @param $query
+     * @param $query Model
      *
      * @return mixed
      */

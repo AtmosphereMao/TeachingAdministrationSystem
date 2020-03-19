@@ -151,7 +151,7 @@ class Order extends Model
     }
 
     /**
-     * @param $query
+     * @param $query Model
      * @param $status
      *
      * @return mixed
@@ -166,7 +166,7 @@ class Order extends Model
     }
 
     /**
-     * @param $query
+     * @param $query Model
      * @param $keywords
      *
      * @return mixed

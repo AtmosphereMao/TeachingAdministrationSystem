@@ -76,7 +76,7 @@ class Role extends Model
     /**
      * 作用域：显示.
      *
-     * @param $query
+     * @param $query Model
      *
      * @return mixed
      */

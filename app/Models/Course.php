@@ -144,7 +144,7 @@ class Course extends Model
     /**
      * 作用域：显示.
      *
-     * @param $query
+     * @param $query Model
      *
      * @return mixed
      */
@@ -156,7 +156,7 @@ class Course extends Model
     /**
      * 作用域：不显示.
      *
-     * @param $query
+     * @param $query Model
      *
      * @return mixed
      */
@@ -168,7 +168,7 @@ class Course extends Model
     /**
      * 作用域：上线的视频.
      *
-     * @param $query
+     * @param $query Model
      *
      * @return mixed
      */
@@ -180,7 +180,7 @@ class Course extends Model
     /**
      * 作用域：关键词搜索.
      *
-     * @param $query
+     * @param $query Model
      * @param string $keywords
      *
      * @return mixed

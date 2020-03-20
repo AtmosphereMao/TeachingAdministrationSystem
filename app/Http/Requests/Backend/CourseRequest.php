@@ -41,7 +41,6 @@ class CourseRequest extends BaseRequest
             'original_desc' => 'required',
             'published_at' => 'required',
             'category_id' => 'required',
-            'tag_id' => 'required',
         ];
     }
 
@@ -87,6 +86,6 @@ class CourseRequest extends BaseRequest
     public function getTagsId(){
 //        $tag_link_datas = $this->input('tag_id');
 //        $tag_link_datas = json_decode($tag_link_datas);
-        return $this->input('tag_id');
+        return $this->input('tag_id', []);
     }
 }

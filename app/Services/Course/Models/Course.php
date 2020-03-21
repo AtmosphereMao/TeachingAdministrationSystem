@@ -197,10 +197,18 @@ class Course extends Base
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function tag()
     {
         return $this->hasMany(CourseTagLink::class, 'course_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function visitors()
+    {
+        return $this->hasMany(CourseVisitor::class);
     }
 }

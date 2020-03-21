@@ -21,7 +21,8 @@
                 <div class="course-info-box">
                     <div class="course-title">{{$course['title']}}</div>
                     <div class="course-info">
-                        <span class="user_count">已有{{$course['user_count']}}人订购</span>
+                        <span class="user_count">已有 {{$course['user_count']}} 人订购</span><br>
+                        <span class="user_count">课程浏览数：{{$logCount}} 次</span>
                         <span class="price"><small>￥</small>{{$course['charge']}}</span>
                     </div>
                 </div>

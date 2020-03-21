@@ -11,6 +11,7 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Services\Course\Models\CourseVisitor;
 use function Couchbase\defaultDecoder;
 use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
@@ -33,6 +34,10 @@ use App\Services\Course\Interfaces\CourseServiceInterface;
 use App\Services\Course\Interfaces\CourseCommentServiceInterface;
 use App\Services\Course\Interfaces\CourseCategoryServiceInterface;
 use App\Services\Course\Interfaces\CourseTagServiceInterface;
+
+use App\Services\Course\Interfaces\CourseVisitorServiceInterface;
+use App\Services\Course\Services\CourseVisitorService;
+use Weboap\Visitor\Facades\VisitorFacade;
 
 class CourseController extends FrontendController
 {
@@ -68,6 +73,10 @@ class CourseController extends FrontendController
      * @var CourseTagService
      */
     protected $courseTagService;
+    /**
+     * @var CourseVisitorService
+     */
+    protected $courseVisitorService;
     /**
      * @var BusinessState
      */
@@ -118,7 +127,8 @@ class CourseController extends FrontendController
         ] = $this->configService->getSeoCourseListPage();
         $courseCategories = $this->courseCategoryService->all();
         $courseTags = $this->courseTagService->all();
-//        dd($courseTags);
+
+
         $queryParams = function ($param) {
             $request = \request();
             $params = [
@@ -157,6 +167,8 @@ class CourseController extends FrontendController
 
     public function show(Request $request, $id, $slug)
     {
+        VisitorFacade::log($id);
+        $logCount = CourseVisitor::query()->where('course_id',$id)->count();
         $scene = $request->input('scene', '');
 
         $course = $this->courseService->find($id);
@@ -198,7 +210,8 @@ class CourseController extends FrontendController
             'category',
             'isLikeCourse',
             'firstVideo',
-            'scene'
+            'scene',
+            'logCount'
         ));
     }
 

@@ -228,6 +228,7 @@
             <div class="col-12 text-center">
                 <p>© {{date('Y')}} {{config('app.name')}} · <a href="http://www.beian.miit.gov.cn"
                                                                target="_blank">{{$gConfig['system']['icp']}}</a></p>
+                <p>总访客量：{{\App\Services\Course\Models\CourseVisitor::All()->count()}}</p>
             </div>
         </div>
     </div>

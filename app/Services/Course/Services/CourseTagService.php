@@ -25,4 +25,5 @@ class CourseTagService implements CourseTagServiceInterface
     {
         return CourseTag::findOrFail($id)->toArray();
     }
+
 }

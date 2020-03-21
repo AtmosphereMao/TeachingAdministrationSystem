@@ -26,7 +26,7 @@
                                 <div class="form-group">
                                     <label><input type="checkbox"
                                                   name="remember" {{ old('remember') ? 'checked' : '' }}> 记住我</label>
-                                    <a href="{{ route('password.request') }}" class="float-right">忘记密码？</a>
+                                    {{--<a href="{{ route('password.request') }}" class="float-right">忘记密码？</a>--}}
                                 </div>
                                 <div class="form-group mt-2">
                                     <button class="btn btn-primary btn-block">登录</button>

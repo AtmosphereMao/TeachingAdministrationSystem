@@ -73,6 +73,14 @@ class LoginController extends BaseController
             'password' => $password,
         ] = $request->filldata();
         $user = $this->userService->passwordLogin($email, $password);
+        if (!$user) {
+            flash(__('email not exists or password error'), 'error');
+            return back();
+        }
+        if ($user['is_lock'] == FrontendConstant::YES) {
+            flash(__('current user was locked,please contact administrator'));
+            return back();
+        }
         if($user['is_activity']==0)
         {
             \Mail::raw(
@@ -83,15 +91,6 @@ class LoginController extends BaseController
                     ->to($user['email']);
             });
             flash(__('register success noactivity'), 'error');
-            return back();
-        }
-
-        if (!$user) {
-            flash(__('email not exists or password error'), 'error');
-            return back();
-        }
-        if ($user['is_lock'] == FrontendConstant::YES) {
-            flash(__('current user was locked,please contact administrator'));
             return back();
         }
         Auth::loginUsingId($user['id'], $request->has('remember'));

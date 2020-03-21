@@ -88,7 +88,7 @@
 
                                 @else
                                     <a class="login-button-hover login-auth" href="{{route('login')}}"
-                                       data-login="0">登录</a>
+                                       >登录</a>
                                 @endif
                             </div>
                         </nav>

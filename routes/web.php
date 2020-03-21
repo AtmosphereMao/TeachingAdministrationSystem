@@ -25,8 +25,8 @@ Route::get('/activity/{token}','Frontend\RegisterController@activity')->name('us
 // 登出
 Route::post('/logout', 'Frontend\LoginController@logout')->name('logout');
 // 找回密码
-Route::get('/password/reset', 'Frontend\ForgotPasswordController@showPage')->name('password.request');
-Route::post('/password/reset', 'Frontend\ForgotPasswordController@handler')->middleware(['throttle:10,1', 'sms.check']);
+//Route::get('/password/reset', 'Frontend\ForgotPasswordController@showPage')->name('password.request');
+//Route::post('/password/reset', 'Frontend\ForgotPasswordController@handler')->middleware(['throttle:10,1', 'sms.check']);
 // Auth Ajax
 Route::group(['prefix' => 'ajax'], function () {
     Route::post('/auth/login/password', 'Frontend\AjaxController@passwordLoin')->name('ajax.login.password');

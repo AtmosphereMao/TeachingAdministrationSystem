@@ -49,7 +49,16 @@
                                     </div>
                                 @endif
                             </h2>
-                            <div class="course-description">{{$course['short_description']}}</div>
+                            <div class="course-description">
+                                <p class="cotent">
+                                    {{$course['short_description']}}
+                                </p>
+                                <div class="course-info" style="color: rgb(153, 153, 153);font-size: 14px;">
+                                    <span class="user_count">已有{{$course['user_count']}}人订购</span><br>
+                                    <span class="user_count">课程浏览数：{{$logCount}} 次</span>
+                                </div>
+                            </div>
+
                             <div class="course-extra-info">
                                 @if($isBuy)
                                     @if($firstVideo)

@@ -34,6 +34,7 @@
         "socialiteproviders/weixin-web": "dev-master",
         "tencentcloud/tencentcloud-sdk-php": "^3.0",
         "tymon/jwt-auth": "1.0.0-rc.5",
+        "weboap/visitor": "^2.0",
         "yansongda/laravel-pay": "^2.0",
         "zgldh/qiniu-laravel-storage": "^0.10.3"
     },

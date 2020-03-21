@@ -12,6 +12,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Events\AdFromEvent;
+use App\Services\Course\Models\CourseVisitor;
 use App\Services\Other\Services\LinkService;
 use App\Services\Base\Services\ConfigService;
 use App\Services\Other\Services\SliderService;
@@ -24,6 +25,7 @@ use App\Services\Other\Interfaces\SliderServiceInterface;
 use App\Services\Course\Interfaces\CourseServiceInterface;
 use App\Services\Other\Interfaces\IndexBannerServiceInterface;
 use App\Services\Course\Interfaces\CourseCategoryServiceInterface;
+use Weboap\Visitor\Facades\VisitorFacade;
 
 class IndexController extends FrontendController
 {
@@ -73,6 +75,8 @@ class IndexController extends FrontendController
 
     public function index()
     {
+        VisitorFacade::log(0);
+        $logCount = CourseVisitor::All()->count();
         $links = $this->linkService->all();
 
         [

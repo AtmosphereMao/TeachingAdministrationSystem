@@ -169,7 +169,7 @@ return [
         /*
          * Package Service Providers...
          */
-
+//        App\Services\Course\Providers\CourseServiceRegisterProvider::class,
         /*
          * Application Service Providers...
          */
@@ -178,6 +178,8 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        // 服务统计
+        App\Providers\VisitorServiceProvider::class,
 
         // Third
         Mews\Captcha\CaptchaServiceProvider::class,

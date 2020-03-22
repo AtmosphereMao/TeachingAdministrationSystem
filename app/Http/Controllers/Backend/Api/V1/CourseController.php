@@ -51,12 +51,9 @@ class CourseController extends BaseController
     public function store(CourseRequest $request, Course $course)
     {
         $data = $request->filldata();
-        $tags = $request->getTagsId();
+        $tags = json_decode($request->getTagsId());
 //        $course->fill($data)->save();
         $id = Course::insertGetId($data);
-        $b = [2,5,6];   // tags_link
-        $a = [2,4,6]; //tags
-        dd(array_diff($a,$b));
 //        dd($tags);
         foreach ($tags as $item){
             CourseTagLink::create(['tag_id'=>$item, 'course_id'=>$id]);

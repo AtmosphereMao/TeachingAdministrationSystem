@@ -13,6 +13,9 @@ namespace App\Services\Order\Services;
 
 use App\Events\OrderCancelEvent;
 use App\Businesses\BusinessState;
+use App\Services\Course\Models\Course;
+use App\Services\Member\Models\UserCourse;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use App\Events\PaymentSuccessEvent;
 use App\Exceptions\ServiceException;
@@ -91,6 +94,11 @@ class OrderService implements OrderServiceInterface
 
             // 订单支付事件
             $order['status'] == Order::STATUS_PAID && event(new PaymentSuccessEvent($order->toArray()));
+            foreach($goodsItems as $goodsItem)
+            {
+                UserCourse::create(['user_id'=>$userId, 'course_id'=>$goodsItem['id'], 'created_at'=>Carbon::now(),'charge'=> $goodsItem['charge']]);
+                Course::query()->where('id',$goodsItem['id'])->increment('user_count');
+            }
 
             return $order->toArray();
         });

@@ -12,8 +12,12 @@
 namespace App\Http\Controllers\Backend\Api\V1;
 
 use App\Models\Order;
+use App\Services\Course\Models\Course;
+use App\Services\Member\Models\UserCourse;
+use App\Services\Order\Models\OrderGoods;
 use Illuminate\Http\Request;
 use App\Events\PaymentSuccessEvent;
+use Illuminate\Support\Carbon;
 
 class OrderController extends BaseController
 {
@@ -33,6 +37,16 @@ class OrderController extends BaseController
     public function finishOrder($id)
     {
         $order = Order::findOrFail($id);
+        $order->update(['status'=>9]);
+//        $orderGood = OrderGoods::where('oid',$id)->first();
+//        switch ($orderGood->goods_type){
+//            case "COURSE":
+//                UserCourse::create(['user_id'=>$orderGood->user_id, 'course_id'=>$orderGood->goods_id, 'created_at'=>Carbon::now(),'charge'=>$orderGood->charge]);
+//                Course::query()->where('id',$orderGood->goods_id)->increment('user_count');
+//                break;
+//            default:
+//                return $this->error();
+//        }
         event(new PaymentSuccessEvent($order->toArray()));
         return $this->success();
     }

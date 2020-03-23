@@ -24,7 +24,7 @@
         components: [{
             name: 'BulletScreenComponent',
             type: AliPlayerComponent.BulletScreenComponent,
-            args: ['{{$user ? sprintf('会员%s', $user['mobile']) : config('app.name')}}', {
+            args: ['{{$user ? sprintf('会员%s', $user['email']) : config('app.name')}}', {
                 fontSize: '16px',
                 color: '#000000'
             }, 'random']

@@ -20,4 +20,5 @@
     <link rel="stylesheet" href="{{asset('/frontend/css/frontend.css')}}">
     <script src="{{asset('frontend/js/frontend.js')}}"></script>
     @yield('css')
+    @yield('js')
 </head>

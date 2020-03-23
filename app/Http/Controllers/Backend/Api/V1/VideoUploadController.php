@@ -11,6 +11,7 @@
 
 namespace App\Http\Controllers\Backend\Api\V1;
 
+use App\Huawei\OBS;
 use Exception;
 use Illuminate\Http\Request;
 use vod\Request\V20170321 as vod;
@@ -23,9 +24,15 @@ class VideoUploadController extends BaseController
 
         return $this->successData(compact('signature'));
     }
+    public function huaweiToken(Request $request)
+    {
+        app()->make(OBS::class)->createOBS();
+    }
 
     public function aliyunCreateVideoToken(Request $request)
     {
+
+        $signature = app()->make(\App\Meedu\Tencent\Vod::class)->getUploadSignature();
         try {
             $title = $request->input('title');
             $filename = $request->input('filename');
@@ -68,5 +75,10 @@ class VideoUploadController extends BaseController
 
             return $this->error($exception->getMessage());
         }
+    }
+
+    public function huaweiCreateVideoToken(Request $request)
+    {
+
     }
 }

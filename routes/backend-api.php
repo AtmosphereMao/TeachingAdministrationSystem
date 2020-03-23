@@ -1,7 +1,7 @@
 <?php
 // {{host}}/backend/api/
 Route::post('/login', 'LoginController@login');
-
+Route::get('/test','VideoUploadController@huaweiToken');
 Route::group(['middleware' => ['auth:administrator']], function () {
 
     Route::get('/user', 'LoginController@user');

@@ -68,7 +68,7 @@ class CourseController extends BaseController
         $tagId = CourseTagLink::query()->where(['course_id'=>$id])->get();
         $temp = [];
         foreach ($tagId as $item) {
-            array_push($temp,$item->id);
+            array_push($temp,$item->tag_id);
         }
         $course->setAttribute('tag_id',$temp);
 //        dd($course);

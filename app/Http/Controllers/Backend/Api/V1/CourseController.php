@@ -51,7 +51,7 @@ class CourseController extends BaseController
     public function store(CourseRequest $request, Course $course)
     {
         $data = $request->filldata();
-        $tags = json_decode($request->getTagsId());
+        $tags = $request->getTagsId();
 //        $course->fill($data)->save();
         $id = Course::insertGetId($data);
 //        dd($tags);

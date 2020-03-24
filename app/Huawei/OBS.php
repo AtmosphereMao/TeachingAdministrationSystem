@@ -8,48 +8,99 @@
 
 namespace  App\Huawei;
 
+use App\Models\VideoUploadId;
 use Obs\ObsClient;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
+use TencentCloud\Dayu\V20180709\Models\DDoSAlarmThreshold;
 
 class OBS
 {
     public function createOBS()
     {
-
         // 创建ObsClient实例
-        $obsClient = new ObsClient ( [
+        return ObsClient::factory([
             'key' => env('HW_OBS_ACCESS_KEY'),
             'secret' => env('HW_OBS_ACCESS_SECRET'),
-            'endpoint' => env('HW_OBS_ENDPOINT').":443"
-        ] );
+            'endpoint' => env('HW_OBS_ENDPOINT') . ":443"
+        ]);
+    }
 
-        // URL有效期，3600秒
-        $expires = 3600;
-        // 创建桶
-        $resp = $obsClient->createSignedUrl( [
-            'Method' => 'PUT',
-            'Bucket' => 'bucketname',
-            'Expires' => $expires
-        ] );
-        printf("SignedUrl:%s\n", $resp ['SignedUrl']);
-
-        $httpClient = new Client(['Verify' => false ]);
-        $content = '<CreateBucketConfiguration><LocationConstraint>your-location</LocationConstraint></CreateBucketConfiguration>';
-        $url = $resp['SignedUrl'];
-//        dd($resp);
-        try{
-            $response = $httpClient -> createV4SignedUrl('GET', $url, ['body' => $content, 'headers'=> $resp['ActualSignedRequestHeaders']]);
-            dd($response);
-            printf("%s using temporary signature url:\n", 'Create bucket');
-            printf("\t%s successfully.\n", $url);
-            printf("\tStatus:%d\n", $response -> getStatusCode());
-            printf("\tContent:%s\n", $response -> getBody() -> getContents());
-            $response -> getBody()-> close();
-        }catch (ClientException $ex){
-            printf("%s using temporary signature url:\n", 'Create bucket');
-            printf("\t%s failed!\n", $url);
-            printf('Exception message:%s', $ex ->getMessage());
+    public function uploadObsBlock(array $input, ObsClient $obsClient)
+    {
+        if($input['offset'] == 0){
+            // init upload
+            $fileOriginal = ".".$input['filename']->getClientOriginalExtension();
+            $resp = $obsClient->initiateMultipartUpload([
+                'Bucket' => env('HW_OBS_BUCKET'),
+                'Key' => 'uploadVideo/' . $input['md5Code'] . $fileOriginal,
+                'ContentType' => 'text/plain',
+                'Metadata' => ['property' => $input['md5Code']]
+            ]);
+            VideoUploadId::create(['md5_code'=>$input['md5Code'],'file_original'=>$fileOriginal,'upload_id'=>$resp['UploadId']]);
+            return $resp;
         }
+        $VideoUploadId = VideoUploadId::query()->where('md5_code',$input['md5Code'])->first();
+        $upload_id = $VideoUploadId->upload_id;
+        $fileOriginal = $VideoUploadId->file_original;
+        $resp = $obsClient->uploadPart([
+            'Bucket' => env('HW_OBS_BUCKET'),
+            'Key' => 'uploadVideo/' . $input['md5Code'] . $fileOriginal,
+            // 设置分段号，范围是1~10000
+            'PartNumber' => $input['blockNum'],
+            // 设置Upload ID
+            'UploadId' => $upload_id,
+            // 设置将要上传的大文件,localfile为上传的本地文件路径，需要指定到具体的文件名
+            'SourceFile' => $input['filename'],
+            // 设置分段大小
+            'PartSize' => $input['blockSize'],
+            // 设置分段的起始偏移大小
+            'Offset' => $input['offset']
+        ]);
+
+        return ['PartNumber'=>$input['blockNum'], 'ETag'=>$resp['ETag']];
+    }
+
+    public function compleleUploadObsBlock(array $parts, array $input,ObsClient $obsClient){
+
+        $VideoUploadId = VideoUploadId::query()->where('md5_code',$input['md5Code'])->first();
+        $upload_id = $VideoUploadId->upload_id;
+        $fileOriginal = $VideoUploadId->file_original;
+
+
+        $resp = $obsClient->completeMultipartUpload([
+            'Bucket' => env('HW_OBS_BUCKET'),
+            'Key' => 'uploadVideo/' . $input['md5Code'] . $fileOriginal,
+                // 设置Upload ID
+            'UploadId' => $upload_id,
+            'Parts' => $parts
+        ]);
+        VideoUploadId::query()->where('md5_code',$input['md5Code'])->delete();
+        return $resp;
+    }
+
+    public function cancelUploadObsBlock(array $input, ObsClient $obsClient)
+    {
+        $VideoUploadId = VideoUploadId::query()->where('md5_code',$input['md5Code'])->first();
+        $upload_id = $VideoUploadId->upload_id;
+        $fileOriginal = $VideoUploadId->file_original;
+
+        $resp = $obsClient->abortMultipartUpload([
+            'Bucket' => env('HW_OBS_BUCKET'),
+            'Key' => 'uploadVideo/' . $input['md5Code'] . $fileOriginal,
+            // 设置Upload ID
+            'UploadId' => $upload_id
+        ]);
+        return $resp;
+    }
+    public function uploadObs(array $input, ObsClient $obsClient)
+    {
+        $fix = ".".$input['filename']->getClientOriginalExtension();
+        $resp = $obsClient->putObject( [
+            'Bucket' =>  env('HW_OBS_BUCKET'),
+            'Key' => $input['md5Code'].$fix,
+            'SourceFile' => $input['filename']
+        ] );
+        return $resp;
     }
 }

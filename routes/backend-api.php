@@ -1,7 +1,6 @@
 <?php
 // {{host}}/backend/api/
 Route::post('/login', 'LoginController@login');
-Route::get('/test','VideoUploadController@huaweiToken');
 Route::group(['middleware' => ['auth:administrator']], function () {
 
     Route::get('/user', 'LoginController@user');
@@ -13,6 +12,9 @@ Route::group(['middleware' => ['auth:administrator']], function () {
         Route::post('/tencent', 'VideoUploadController@tencentToken');
         Route::post('/aliyun/refresh', 'VideoUploadController@aliyunRefreshVideoToken');
         Route::post('/aliyun/create', 'VideoUploadController@aliyunCreateVideoToken');
+        Route::post('/huawei/block','VideoUploadController@huaweiTokenBlock');
+        Route::post('/huawei/cancel','VideoUploadController@huaweiTokenCancel');
+        Route::post('/huawei','VideoUploadController@huaweiToken');
     });
 
     // 友情链接

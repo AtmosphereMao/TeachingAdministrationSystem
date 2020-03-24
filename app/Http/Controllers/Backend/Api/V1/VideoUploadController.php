@@ -24,11 +24,50 @@ class VideoUploadController extends BaseController
 
         return $this->successData(compact('signature'));
     }
-    public function huaweiToken(Request $request)
+
+    public function huaweiTokenBlock(Request $request)
     {
-        app()->make(OBS::class)->createOBS();
+        $obs = app()->make(OBS::class)->createOBS();
+        $input = [
+            'filename' => $request->file('filename'),   // 文件
+            'md5Code' => $request->input('md5Code'),    // MD5 用于确认同一文件
+            'blockNum' => $request->input('blockNum'),  // 设置分段号，范围是1~10000
+            'blockSize' => $request->input('blockSize'),    // 设置分段大小
+            'offset' => $request->input('offset'),  // 设置分段的起始偏移大小
+            'flag' => $request->input('flag')   // 设置是否完成 0未完成 1完成
+        ];
+        // 判断是否完成分块上传
+        if($input['flag']) {
+//            dd(json_encode(['PartNumber'=>'1', 'ETag'=>'1']));
+            $parts = json_decode($request->input('parts'));
+            $signature = app()->make(OBS::class)->compleleUploadObsBlock($parts,$input,$obs);
+        }else   // 未完成继续上传
+            $signature = app()->make(OBS::class)->uploadObsBlock($input, $obs);
+        return $this->successData(compact('signature'));
     }
 
+    public function huaweiToken(Request $request)
+    {
+
+        $obs = app()->make(OBS::class)->createOBS();
+        $input = [
+            'filename' => $request->file('filename'),   // 文件
+            'md5Code' => $request->input('md5Code'),    // MD5 用于确认同一文件
+          ];
+        $response = app()->make(OBS::class)->uploadObs($input, $obs);
+        $signature = ['ETag'=>$response['ETag'],'ObjectURL'=>$response['ObjectURL']];
+        return $this->successData(compact('signature'));
+    }
+
+    public function huaweiTokenCancel(Request $request)
+    {
+        $obs = app()->make(OBS::class)->createOBS();
+        $input = [
+            'md5Code' => $request->input('md5Code'),    // MD5 用于确认同一文件
+        ];
+        $response = app()->make(OBS::class)->cancelUploadObsBlock($input, $obs);
+        return $this->successData();
+    }
     public function aliyunCreateVideoToken(Request $request)
     {
 

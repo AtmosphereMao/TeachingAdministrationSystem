@@ -22,7 +22,7 @@ class OBS
         return ObsClient::factory([
             'key' => env('HW_OBS_ACCESS_KEY'),
             'secret' => env('HW_OBS_ACCESS_SECRET'),
-            'endpoint' => env('HW_OBS_ENDPOINT') . ":443"
+            'endpoint' => env('HW_OBS_ENDPOINT')
         ]);
     }
 
@@ -111,7 +111,7 @@ class OBS
             'Bucket' =>  env('HW_OBS_BUCKET'),
             'Prefix' => 'uploadVideo/'.$md5code
         ] );
-        $resp = $obsClient->createSignedUrl([
+        $resp = $obsClient->createV4SignedUrl([
             'Expires' => env('HW_OBS_Expires'),
             'Method' => 'GET',
             'Bucket' => env('HW_OBS_BUCKET'),

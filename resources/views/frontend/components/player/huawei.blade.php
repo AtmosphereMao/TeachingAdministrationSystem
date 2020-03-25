@@ -16,9 +16,10 @@
             userId: 'playerDemo01',
             domainId: 'hwPlayer',
         };
+
         var player = new HWPlayer('test', options, function () {
             //播放器已经准备好了
-            player.src("{{get_huawei_play_url($video['huawei_video_id'])}}");
+            player.src("{!! get_huawei_play_url($video['huawei_video_id']) !!}");
             // "this"指向的是HWPlayer的实例对象player
             player.play();
             // 使用事件监听

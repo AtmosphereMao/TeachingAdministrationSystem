@@ -37,12 +37,13 @@ class OBS
                 'ContentType' => 'text/plain',
                 'Metadata' => ['property' => $input['md5Code']]
             ]);
-            VideoUploadId::create(['md5_code'=>$input['md5Code'],'file_original'=>$fileOriginal,'upload_id'=>$resp['UploadId']]);
-            return $resp;
+            $upload_id = $resp['UploadId'];
+            VideoUploadId::create(['md5_code'=>$input['md5Code'],'file_original'=>$fileOriginal,'upload_id'=>$upload_id]);
+        }else{
+            $VideoUploadId = VideoUploadId::query()->where('md5_code',$input['md5Code'])->first();
+            $upload_id = $VideoUploadId->upload_id;
+            $fileOriginal = $VideoUploadId->file_original;
         }
-        $VideoUploadId = VideoUploadId::query()->where('md5_code',$input['md5Code'])->first();
-        $upload_id = $VideoUploadId->upload_id;
-        $fileOriginal = $VideoUploadId->file_original;
         $resp = $obsClient->uploadPart([
             'Bucket' => env('HW_OBS_BUCKET'),
             'Key' => 'uploadVideo/' . $input['md5Code'] . $fileOriginal,

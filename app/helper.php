@@ -279,7 +279,7 @@ if (!function_exists('get_payments')) {
          */
         $configService = app()->make(\App\Services\Base\Interfaces\ConfigServiceInterface::class);
         $payments = collect($configService->getPayments())->filter(function ($payment) use ($scene) {
-            $enabled = $payment['enabled'] ?? false;
+            $enabled = $payment['enabled'] == 1;
             $isSet = $payment[$scene] ?? false;
 
             return $enabled && $isSet;

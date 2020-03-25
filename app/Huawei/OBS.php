@@ -68,7 +68,21 @@ class OBS
         $upload_id = $VideoUploadId->upload_id;
         $fileOriginal = $VideoUploadId->file_original;
 
-
+        $resp = $obsClient->uploadPart([
+            'Bucket' => env('HW_OBS_BUCKET'),
+            'Key' => 'uploadVideo/' . $input['md5Code'] . $fileOriginal,
+            // 设置分段号，范围是1~10000
+            'PartNumber' => $input['blockNum'],
+            // 设置Upload ID
+            'UploadId' => $upload_id,
+            // 设置将要上传的大文件,localfile为上传的本地文件路径，需要指定到具体的文件名
+            'SourceFile' => $input['filename'],
+            // 设置分段大小
+            'PartSize' => $input['blockSize'],
+            // 设置分段的起始偏移大小
+            'Offset' => $input['offset']
+        ]);
+        $parts[count($parts)] = ['PartNumber'=>$input['blockNum'], 'ETag'=>$resp['ETag']];
         $resp = $obsClient->completeMultipartUpload([
             'Bucket' => env('HW_OBS_BUCKET'),
             'Key' => 'uploadVideo/' . $input['md5Code'] . $fileOriginal,

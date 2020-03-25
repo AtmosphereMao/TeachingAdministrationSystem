@@ -129,6 +129,7 @@
                                                     <span class="free-label">免费</span>
                                                 @endif
                                                 <span class="video-duration">{{duration_humans($video['duration'])}}</span>
+                                                <span class="video-duration">{{duration_humans($video['duration'])}}</span>
                                                 @if($isBuy)
                                                     <a href="{{route('video.show', [$video['course_id'], $video['id'], $video['slug']])}}"
                                                        class="learn-button">继续学习</a>

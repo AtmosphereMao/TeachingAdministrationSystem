@@ -17,7 +17,7 @@ class RegisterPasswordRequest extends BaseRequest
     {
         return [
             'nick_name' => 'required|max:10',
-            'email' => 'bail|required',
+            'email' => 'bail|required|email',
             'password' => 'bail|required|min:6|max:16|confirmed',
         ];
     }
@@ -28,6 +28,7 @@ class RegisterPasswordRequest extends BaseRequest
             'nick_name.required' => __('nick_name.required'),
             'nick_name.max' => __('nick_name.max', ['max' => 10]),
             'email.required' => __('email.required'),
+            'email.email' => '邮箱格式有误',
             'password.required' => __('password.required'),
             'password.min' => __('password.min'),
             'password.max' => __('password.max'),

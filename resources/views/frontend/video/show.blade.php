@@ -29,6 +29,8 @@
                                     @include('frontend.components.player.aliyun', ['video' => $video])
                                 @elseif($video['tencent_video_id'])
                                     @include('frontend.components.player.tencent', ['video' => $video])
+                                @elseif($video['huawei_video_id'])
+                                    @include('frontend.components.player.huawei', ['video' => $video])
                                 @else
                                     @include('frontend.components.player.aliyunSimple', ['video' => $video])
                                 @endif

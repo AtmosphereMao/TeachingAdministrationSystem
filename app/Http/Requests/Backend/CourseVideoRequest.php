@@ -71,6 +71,7 @@ class CourseVideoRequest extends BaseRequest
             'url' => $this->input('url', '') ?? '',
             'aliyun_video_id' => $this->input('aliyun_video_id', '') ?? '',
             'tencent_video_id' => $this->input('tencent_video_id', '') ?? '',
+            'huawei_video_id' => $this->input('huawei_video_id', '') ?? '',
             'view_num' => $this->input('view_num', 0),
             'short_description' => $this->input('short_description'),
             'original_desc' => $this->input('original_desc'),

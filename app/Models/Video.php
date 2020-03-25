@@ -40,6 +40,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int                                                                 $chapter_id
  * @property int                                                                 $duration          时长，单位：秒
  * @property string|null                                                         $tencent_video_id  腾讯云video_id
+ * @property string|null                                                         $huaiwei_video_id  华为云video_id
  * @property \Illuminate\Database\Eloquent\Collection|\App\User[]                $buyUsers
  * @property \App\Models\CourseChapter                                           $chapter
  * @property \Illuminate\Database\Eloquent\Collection|\App\Models\VideoComment[] $comments
@@ -92,6 +93,7 @@ class Video extends Model
         'seo_keywords', 'seo_description', 'published_at',
         'is_show', 'charge', 'aliyun_video_id',
         'chapter_id', 'duration', 'tencent_video_id',
+        'huaiwei_video_id'
     ];
 
     /**

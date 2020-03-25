@@ -413,3 +413,13 @@ if (!function_exists('get_tencent_play_url')) {
         }
     }
 }
+
+if (!function_exists('get_huawei_play_url')) {
+    function get_huawei_play_url(string $vid)
+    {
+        $obsSevice =app()->make(\App\Huawei\OBS::class);
+        $obs = $obsSevice->createOBS();
+        $resp = $obsSevice->getMetadataObs($vid, $obs);
+        return $resp['SignedUrl'];
+    }
+}

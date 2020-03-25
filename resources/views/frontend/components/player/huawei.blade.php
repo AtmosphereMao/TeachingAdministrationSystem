@@ -18,7 +18,7 @@
         };
         var player = new HWPlayer('test', options, function () {
             //播放器已经准备好了
-            player.src("https://teach-manager.obs.cn-south-1.myhuaweicloud.com/demo.mp4");
+            player.src("{{get_huawei_play_url($video['huawei_video_id'])}}");
             // "this"指向的是HWPlayer的实例对象player
             player.play();
             // 使用事件监听

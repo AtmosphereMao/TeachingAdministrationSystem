@@ -93,14 +93,30 @@ class OBS
         ]);
         return $resp;
     }
+
     public function uploadObs(array $input, ObsClient $obsClient)
     {
         $fix = ".".$input['filename']->getClientOriginalExtension();
         $resp = $obsClient->putObject( [
             'Bucket' =>  env('HW_OBS_BUCKET'),
-            'Key' => $input['md5Code'].$fix,
+            'Key' => 'uploadVideo/' .$input['md5Code'].$fix,
             'SourceFile' => $input['filename']
         ] );
+        return $resp;
+    }
+
+    public function getMetadataObs(string $md5code, ObsClient $obsClient)
+    {
+        $resp = $obsClient->listObjects( [
+            'Bucket' =>  env('HW_OBS_BUCKET'),
+            'Prefix' => 'uploadVideo/'.$md5code
+        ] );
+        $resp = $obsClient->createSignedUrl([
+            'Expires' => env('HW_OBS_Expires'),
+            'Method' => 'GET',
+            'Bucket' => env('HW_OBS_BUCKET'),
+            'Key' => $resp['Contents'][0]['Key']
+        ]);
         return $resp;
     }
 }

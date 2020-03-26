@@ -14,7 +14,7 @@ class AlterVideosTable extends Migration
     public function up()
     {
         Schema::table('videos', function (Blueprint $table) {
-            $table->string('huawei_video_id')->nullable(ture)->comment('华为Video ID');
+            $table->string('huawei_video_id')->nullable(true)->comment('华为Video ID');
         });
     }
 

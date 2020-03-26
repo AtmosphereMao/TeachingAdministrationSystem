@@ -113,12 +113,13 @@ class VideoController extends FrontendController
         $keywords = $video['seo_keywords'];
         $description = $video['seo_description'];
         $tempV = [];
+        $count = 0;
         foreach ($videos as $v)
             foreach ($v as $key=>$value)
-                $tempV[$key] = $value['id'];
+                $tempV[$count++] = $value['id'];
         $progress = CourseStudyRecord::query()->whereIn('video_id',$tempV)->where('user_id', Auth::id())->get()->toArray();
         $isBuy = $this->businessState->isBuyCourse($course['id']);
-        dd($videos);
+        dd($tempV);
         return v('frontend.video.show', compact(
             'course',
             'video',

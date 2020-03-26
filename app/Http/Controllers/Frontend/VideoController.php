@@ -118,7 +118,6 @@ class VideoController extends FrontendController
             foreach ($v as $key=>$value)
                 $tempV[$count++] = $value['id'];
         $progress = CourseStudyRecord::query()->whereIn('video_id',$tempV)->where('user_id', Auth::id())->get()->toArray();
-        dd($progress);
         $isBuy = $this->businessState->isBuyCourse($course['id']);
         return v('frontend.video.show', compact(
             'course',

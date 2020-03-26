@@ -429,7 +429,7 @@ if (!function_exists('progress_humans')) {
     {
         foreach ($progress as $item)
         {
-            if($item['id']==$videoId)
+            if($item['video_id']==$videoId)
             {
                 if($item['is_over'])
                     return "已观看：100%";

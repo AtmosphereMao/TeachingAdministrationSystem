@@ -102,7 +102,10 @@
                                                 @if($videoItem['charge'] === 0)
                                                     <span class="free-label">免费</span>
                                                 @endif
-                                                <span class="video-duration">{{duration_humans($videoItem['duration'])}}</span>
+                                                <span class="video-duration" style="margin-right: 10px;">{{duration_humans($video['duration'])}}</span>
+                                                @if($isBuy || $video['charge'] === 0)
+                                                    <span class="video-duration"style="margin-right: 10px;">{{$progressData = progress_humans($progress, $video['id'], $video['duration'])}}</span>
+                                                @endif
                                                 <a href="{{route('video.show', [$videoItem['course_id'], $videoItem['id'], $videoItem['slug']])}}"
                                                    class="learn-button">开始学习</a>
                                             </div>

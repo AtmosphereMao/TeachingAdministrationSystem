@@ -112,6 +112,7 @@ class VideoController extends FrontendController
         $title = $video['title'];
         $keywords = $video['seo_keywords'];
         $description = $video['seo_description'];
+        $progress = CourseStudyRecord::query()->whereIn('video_id',$tempV)->where('user_id', Auth::id())->get()->toArray();
 
         return v('frontend.video.show', compact(
             'course',
@@ -124,7 +125,8 @@ class VideoController extends FrontendController
             'videos',
             'chapters',
             'canSeeVideo',
-            'scene'
+            'scene',
+            'progress'
         ));
     }
 

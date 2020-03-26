@@ -30,9 +30,7 @@ class OBS
     {
         if($input['offset'] == 0){
             // init upload
-
-            $fileOriginal = ".".substr(strrchr($input['fileOriginal'],'.'),1);
-            dd($fileOriginal);
+            $fileOriginal = substr($input['fileOriginal'], strrpos($input['fileOriginal'], '.'));
             $resp = $obsClient->initiateMultipartUpload([
                 'Bucket' => env('HW_OBS_BUCKET'),
                 'Key' => 'uploadVideo/' . $input['md5Code'] . $fileOriginal,
@@ -41,14 +39,16 @@ class OBS
             ]);
             $upload_id = $resp['UploadId'];
             VideoUploadId::create(['md5_code'=>$input['md5Code'],'file_original'=>$fileOriginal,'upload_id'=>$upload_id]);
+            $md5Code = $input['md5Code'];
         }else{
             $VideoUploadId = VideoUploadId::query()->where('md5_code',$input['md5Code'])->first();
+            $md5Code = $VideoUploadId->md5_code;
             $upload_id = $VideoUploadId->upload_id;
             $fileOriginal = $VideoUploadId->file_original;
         }
         $resp = $obsClient->uploadPart([
             'Bucket' => env('HW_OBS_BUCKET'),
-            'Key' => 'uploadVideo/' . $input['md5Code'] . $fileOriginal,
+            'Key' => 'uploadVideo/' . $md5Code . $fileOriginal,
             // 设置分段号，范围是1~10000
             'PartNumber' => $input['blockNum'],
             // 设置Upload ID
@@ -69,10 +69,10 @@ class OBS
         $VideoUploadId = VideoUploadId::query()->where('md5_code',$input['md5Code'])->first();
         $upload_id = $VideoUploadId->upload_id;
         $fileOriginal = $VideoUploadId->file_original;
-
+        $md5Code = $VideoUploadId->md5_code;
         $resp = $obsClient->uploadPart([
             'Bucket' => env('HW_OBS_BUCKET'),
-            'Key' => 'uploadVideo/' . $input['md5Code'] . $fileOriginal,
+            'Key' => 'uploadVideo/' . $md5Code . $fileOriginal,
             // 设置分段号，范围是1~10000
             'PartNumber' => $input['blockNum'],
             // 设置Upload ID
@@ -85,15 +85,15 @@ class OBS
             'Offset' => $input['offset']
         ]);
         $parts[count($parts)] = ['PartNumber'=>$input['blockNum'], 'ETag'=>$resp['ETag']];
-        $resp = $obsClient->completeMultipartUpload([
+        $obsClient->completeMultipartUpload([
             'Bucket' => env('HW_OBS_BUCKET'),
-            'Key' => 'uploadVideo/' . $input['md5Code'] . $fileOriginal,
+            'Key' => 'uploadVideo/' . $md5Code . $fileOriginal,
                 // 设置Upload ID
             'UploadId' => $upload_id,
             'Parts' => $parts
         ]);
-        VideoUploadId::query()->where('md5_code',$input['md5Code'])->delete();
-        return $resp;
+        $VideoUploadId->delete();
+        return $md5Code;
     }
 
     public function cancelUploadObsBlock(array $input, ObsClient $obsClient)

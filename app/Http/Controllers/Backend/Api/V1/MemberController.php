@@ -33,7 +33,7 @@ class MemberController extends BaseController
         $members = User::with(['role'])
             ->when($keywords, function ($query) use ($keywords) {
                 return $query->where('nick_name', 'like', "%{$keywords}%")
-                    ->orWhere('mobile', 'like', "%{$keywords}%");
+                    ->orWhere('email', 'like', "%{$keywords}%");
             })
             ->when($roleId, function ($query) use ($roleId) {
                 $query->whereRoleId($roleId)->where('role_expired_at', '>', Carbon::now());

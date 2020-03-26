@@ -128,9 +128,10 @@
                                                 @if($video['charge'] === 0)
                                                     <span class="free-label">免费</span>
                                                 @endif
-
-                                                <span class="video-duration">{{duration_humans($video['duration'])}}</span>
-                                                <span class="video-duration"style="margin-right: 10px;">{{$progressData = progress_humans($progress, $video['id'], $video['duration'])}}</span>
+                                                <span class="video-duration" style="margin-right: 10px;">{{duration_humans($video['duration'])}}</span>
+                                                @if($isBuy || $video['charge'] === 0)
+                                                    <span class="video-duration"style="margin-right: 10px;">{{$progressData = progress_humans($progress, $video['id'], $video['duration'])}}</span>
+                                                @endif
 
                                             @if($isBuy)
                                                     <a href="{{route('video.show', [$video['course_id'], $video['id'], $video['slug']])}}"
@@ -156,8 +157,11 @@
                                             @if($video['charge'] === 0)
                                                 <span class="free-label">免费</span>
                                             @endif
-                                            <span class="video-duration">已观看：{{progress_humans($progress, $video)}}</span>
-                                            <span class="video-duration">{{duration_humans($video['duration'])}}</span>
+                                            <span class="video-duration" style="margin-right: 10px;">{{duration_humans($video['duration'])}}</span>
+                                            @if($isBuy || $video['charge'] === 0)
+                                                <span class="video-duration"style="margin-right: 10px;">{{$progressData = progress_humans($progress, $video['id'], $video['duration'])}}</span>
+                                            @endif
+
                                             @if($isBuy)
                                                 <a href="{{route('video.show', [$video['course_id'], $video['id'], $video['slug']])}}"
                                                    class="learn-button">继续学习</a>

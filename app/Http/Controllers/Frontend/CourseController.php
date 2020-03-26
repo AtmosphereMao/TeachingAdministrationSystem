@@ -179,9 +179,10 @@ class CourseController extends FrontendController
         $chapters = $this->courseService->chapters($course['id']);
         $videos = $this->videoService->courseVideos($course['id']);
         $tempV = [];
-        foreach ($videos as $video)
-            foreach ($video as $key=>$value)
-                $tempV[$key] = $value['id'];
+        $count = 0;
+        foreach ($videos as $v)
+            foreach ($v as $key=>$value)
+                $tempV[$count++] = $value['id'];
         $progress = CourseStudyRecord::query()->whereIn('video_id',$tempV)->where('user_id', Auth::id())->get()->toArray();
         $comments = $this->courseCommentService->courseComments($course['id']);
         $commentUsers = $this->userService->getList(array_column($comments, 'user_id'), ['role']);

@@ -32,7 +32,7 @@
                 console.log(player.currentTime());
                 if(!flag)
                 {
-                    $.post('{{url()->full()}}/record',{
+                    $.post('{{url(null,[],true)->full()}}/record',{
                         progress:player.currentTime(),
                         videoLong:player.duration(),
                         _token:$('meta[name="csrf-token"]').attr('content')

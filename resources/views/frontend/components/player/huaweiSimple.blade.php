@@ -30,9 +30,10 @@
 
             player.on('pause', function () {
                 console.log(player.currentTime());
+                var url = window.location.href;
                 if(!flag)
                 {
-                    $.post('{{\Illuminate\Support\Facades\URL::full()}}/record',{
+                    $.post(url+'/record',{
                         progress:player.currentTime(),
                         videoLong:player.duration(),
                         _token:$('meta[name="csrf-token"]').attr('content')

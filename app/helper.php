@@ -431,7 +431,10 @@ if (!function_exists('progress_humans')) {
         {
             if($item['id']==$videoId)
             {
-                return "已观看：".(int)round($item['progress']/$videoLong*100)."%";
+                if($item['is_over'])
+                    return "已观看：100%";
+                else
+                    return "已观看：".(int)round($item['progress']/$videoLong*100)."%";
             }
         }
         return "未观看";

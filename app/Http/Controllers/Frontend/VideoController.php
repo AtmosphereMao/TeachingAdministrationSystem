@@ -181,7 +181,7 @@ class VideoController extends FrontendController
         $selectSP = CourseStudyRecord::query()->where(['video_id'=>$id,'user_id'=>Auth::id()])->first();
         if(!$selectSP)
         {
-            if($progress<$videoLong)
+            if($progress<$videoLong-5)
                 CourseStudyRecord::query()->create(['user_id'=>Auth::id(),'course_id'=>$courseId,'video_id'=>$id,'progress'=>$progress,'is_over'=>0]);
             else
                 CourseStudyRecord::query()->create(['user_id'=>Auth::id(),'course_id'=>$courseId,'video_id'=>$id,'progress'=>$videoLong,'is_over'=>1]);

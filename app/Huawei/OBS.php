@@ -30,7 +30,6 @@ class OBS
     {
         if($input['offset'] == 0){
             // init upload
-
             $fileOriginal = substr($input['fileOriginal'], strrpos($input['fileOriginal'], '.'));
             $resp = $obsClient->initiateMultipartUpload([
                 'Bucket' => env('HW_OBS_BUCKET'),

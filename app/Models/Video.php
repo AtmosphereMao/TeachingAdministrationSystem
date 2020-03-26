@@ -93,7 +93,7 @@ class Video extends Model
         'seo_keywords', 'seo_description', 'published_at',
         'is_show', 'charge', 'aliyun_video_id',
         'chapter_id', 'duration', 'tencent_video_id',
-        'huaiwei_video_id'
+        'huawei_video_id'
     ];
 
     /**

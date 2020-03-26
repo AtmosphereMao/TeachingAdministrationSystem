@@ -32,7 +32,7 @@
                                 @elseif($video['huawei_video_id'])
                                     @include('frontend.components.player.huawei', ['video' => $video])
                                 @else
-                                    @include('frontend.components.player.aliyunSimple', ['video' => $video])
+                                    @include('frontend.components.player.huaweiSimple', ['video' => $video])
                                 @endif
                             </div>
                         @else

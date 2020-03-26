@@ -31,11 +31,13 @@ class VideoUploadController extends BaseController
         $obs = $obsService->createOBS();
         $input = [
             'filename' => $request->file('filename'),   // 文件
+            'fileOriginal' => $request->input('fileOriginal'),   //文件名后缀
             'md5Code' => $request->input('md5Code'),    // MD5 用于确认同一文件
             'blockNum' => $request->input('blockNum'),  // 设置分段号，范围是1~10000
             'blockSize' => $request->input('blockSize'),    // 设置分段大小
             'offset' => $request->input('offset'),  // 设置分段的起始偏移大小
             'flag' => $request->input('flag')   // 设置是否完成 0未完成 1完成
+
         ];
         // 判断是否完成分块上传
         if($input['flag']) {

@@ -30,7 +30,8 @@ class OBS
     {
         if($input['offset'] == 0){
             // init upload
-            $fileOriginal = ".".$input['filename']->getClientOriginalExtension();
+
+            $fileOriginal = substr($input['fileOriginal'], strrpos($input['fileOriginal'], '.'));
             $resp = $obsClient->initiateMultipartUpload([
                 'Bucket' => env('HW_OBS_BUCKET'),
                 'Key' => 'uploadVideo/' . $input['md5Code'] . $fileOriginal,
@@ -126,8 +127,8 @@ class OBS
             'Bucket' =>  env('HW_OBS_BUCKET'),
             'Prefix' => 'uploadVideo/'.$md5code
         ] );
-        $resp = $obsClient->createV4SignedUrl([
-            'Expires' => env('HW_OBS_Expires'),
+        $resp = $obsClient->createV4SignedUrl([     // 创建临时授权URL
+            'Expires' => env('HW_OBS_Expires'), // 授权时长4小时
             'Method' => 'GET',
             'Bucket' => env('HW_OBS_BUCKET'),
             'Key' => $resp['Contents'][0]['Key']

@@ -11,13 +11,16 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Services\Course\Models\Course;
 use App\Services\Course\Models\CourseStudyRecord;
 use App\Services\Course\Models\CourseVisitor;
+use App\Services\Member\Models\UserCourse;
 use function Couchbase\defaultDecoder;
 use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
 use App\Businesses\BusinessState;
 use App\Constant\FrontendConstant;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use App\Services\Base\Services\ConfigService;
 use App\Services\Member\Services\UserService;
@@ -257,6 +260,8 @@ class CourseController extends FrontendController
         $order = $this->orderService->createCourseOrder(Auth::id(), $course, $promoCodeId);
 
         if ($order['status'] === FrontendConstant::ORDER_PAID) {
+            UserCourse::create(['user_id'=>$order['user_id'], 'course_id'=>$course['id'], 'created_at'=>Carbon::now(),'charge'=>$order['charge']]);
+            Course::query()->where('id',$course['id'])->increment('user_count');
             flash(__('success'), 'success');
             return redirect(route('course.show', [$course['id'], $course['slug']]));
         }

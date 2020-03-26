@@ -51,6 +51,9 @@ Route::get('/videos', 'Frontend\VideoController@index')->name('videos');
 Route::get('/course/{id}/{slug}', 'Frontend\CourseController@show')->name('course.show');
 // 视频详情
 Route::get('/course/{course_id}/video/{id}/{slug}', 'Frontend\VideoController@show')->name('video.show');
+// 视频学习记录
+Route::post('/course/{course_id}/video/{id}/{slug}/record', 'Frontend\VideoController@record')->name('video.progress');
+
 // 搜索
 Route::get('/search', 'Frontend\SearchController@searchHandler')->name('search');
 

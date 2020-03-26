@@ -11,6 +11,7 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Services\Course\Models\CourseStudyRecord;
 use App\Services\Course\Models\CourseVisitor;
 use function Couchbase\defaultDecoder;
 use Illuminate\Support\Arr;
@@ -174,6 +175,11 @@ class CourseController extends FrontendController
         $course = $this->courseService->find($id);
         $chapters = $this->courseService->chapters($course['id']);
         $videos = $this->videoService->courseVideos($course['id']);
+        $tempV = [];
+        foreach ($videos as $video)
+            foreach ($video as $key=>$value)
+                $tempV[$key] = $value['id'];
+        $progress = CourseStudyRecord::query()->whereIn('video_id',$tempV)->where('user_id', Auth::id())->get()->toArray();
         $comments = $this->courseCommentService->courseComments($course['id']);
         $commentUsers = $this->userService->getList(array_column($comments, 'user_id'), ['role']);
         $commentUsers = array_column($commentUsers, null, 'id');
@@ -211,7 +217,8 @@ class CourseController extends FrontendController
             'isLikeCourse',
             'firstVideo',
             'scene',
-            'logCount'
+            'logCount',
+            'progress'
         ));
     }
 

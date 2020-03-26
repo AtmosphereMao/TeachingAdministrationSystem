@@ -5,6 +5,7 @@
 <script src="https://media-cache.huaweicloud.com/video/hwplayer/1.0.0/dist/hwplayer.js?flvjs=true"></script>
 {{--<script type="text/javascript" charset="utf-8" src="{{asset('/js/aliplayercomponents-1.0.3.min.js')}}"></script>--}}
 <script>
+    var flag = false;
     hwplayerloaded(function () {
         var options = {
             //是否显示控制栏，包括进度条，播放暂停按钮，音量调节等组件
@@ -23,8 +24,23 @@
             // "this"指向的是HWPlayer的实例对象player
             player.play();
             // 使用事件监听
-            player.on('ended', function () {
-                //播放结束了
+            player.on("firstplay",function () {
+
+            })
+
+            player.on('pause', function () {
+                console.log(player.currentTime());
+                if(!flag)
+                {
+                    $.post('{{url()->full()}}/record',{
+                        progress:player.currentTime(),
+                        videoLong:player.duration(),
+                        _token:$('meta[name="csrf-token"]').attr('content')
+                    },function (response) {
+                        if(response.status ==0){flag=true;}
+                    });
+                }
+
             });
         });
     });

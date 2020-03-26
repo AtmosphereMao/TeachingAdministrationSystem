@@ -11,6 +11,7 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Services\Course\Models\CourseStudyRecord;
 use Illuminate\Http\Request;
 use App\Businesses\BusinessState;
 use App\Constant\FrontendConstant;
@@ -171,5 +172,30 @@ class VideoController extends FrontendController
         $payment = $request->input('payment_sign');
 
         return redirect(route('order.pay', ['scene' => $paymentScene, 'payment' => $payment, 'order_id' => $order['order_id']]));
+    }
+
+    public function record(Request $request,$courseId, $id, $slug)
+    {
+        $progress = (int)$request->input('progress');
+        $videoLong = (int)$request->input('videoLong');
+        $selectSP = CourseStudyRecord::query()->where(['video_id'=>$id,'user_id'=>Auth::id()])->first();
+        if(!$selectSP)
+        {
+            if($progress<$videoLong)
+                CourseStudyRecord::query()->create(['user_id'=>Auth::id(),'course_id'=>$courseId,'video_id'=>$id,'progress'=>$progress,'is_over'=>0]);
+            else
+                CourseStudyRecord::query()->create(['user_id'=>Auth::id(),'course_id'=>$courseId,'video_id'=>$id,'progress'=>$videoLong,'is_over'=>1]);
+        }else {
+            if ($selectSP['is_over']) {
+                return ['status' => 0];
+            }
+            if ($progress > $selectSP['progress'] && $progress < $videoLong) {
+                $selectSP->update(['progress' => $progress]);
+            } elseif ($progress == $videoLong) {
+                $selectSP->update(['progress' => $videoLong, 'is_over' => 1]);
+                return ['status' => 0];
+            }
+            return ['status' => 1];
+        }
     }
 }

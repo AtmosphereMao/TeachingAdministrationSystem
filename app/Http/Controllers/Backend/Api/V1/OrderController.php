@@ -13,6 +13,7 @@ namespace App\Http\Controllers\Backend\Api\V1;
 
 use App\Models\Order;
 use App\Services\Course\Models\Course;
+use App\Services\Member\Models\Role;
 use App\Services\Member\Models\User;
 use App\Services\Member\Models\UserCourse;
 use App\Services\Order\Models\OrderGoods;
@@ -46,7 +47,8 @@ class OrderController extends BaseController
                 Course::query()->where('id',$orderGood->goods_id)->increment('user_count');
                 break;
             case "ROLE":
-                User::query()->where('id',$orderGood->user_id)->update(['role_id'=>$orderGood->goods_id,'role_expired_at'=>Carbon::now()->addMonth()]);
+                $role = Role::query()->where('id',$orderGood->goods_id)->first();
+                User::query()->where('id',$orderGood->user_id)->update(['role_id'=>$orderGood->goods_id,'role_expired_at'=>Carbon::now()->addDays($role->expire_days)]);
                 break;
             default:
                 return $this->error();

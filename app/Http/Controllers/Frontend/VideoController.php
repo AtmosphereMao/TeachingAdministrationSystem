@@ -112,7 +112,12 @@ class VideoController extends FrontendController
         $title = $video['title'];
         $keywords = $video['seo_keywords'];
         $description = $video['seo_description'];
+        $tempV = [];
+        foreach ($videos as $video)
+            foreach ($video as $key=>$value)
+                $tempV[$key] = $value['id'];
         $progress = CourseStudyRecord::query()->whereIn('video_id',$tempV)->where('user_id', Auth::id())->get()->toArray();
+        $isBuy = $this->businessState->isBuyCourse($course['id']);
 
         return v('frontend.video.show', compact(
             'course',
@@ -126,6 +131,7 @@ class VideoController extends FrontendController
             'chapters',
             'canSeeVideo',
             'scene',
+            'isBuy',
             'progress'
         ));
     }

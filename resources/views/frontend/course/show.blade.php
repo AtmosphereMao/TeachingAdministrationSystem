@@ -128,8 +128,11 @@
                                                 @if($video['charge'] === 0)
                                                     <span class="free-label">免费</span>
                                                 @endif
+
                                                 <span class="video-duration">{{duration_humans($video['duration'])}}</span>
-                                                @if($isBuy)
+                                                <span class="video-duration"style="margin-right: 10px;">{{$progressData = progress_humans($progress, $video['id'], $video['duration'])}}</span>
+
+                                            @if($isBuy)
                                                     <a href="{{route('video.show', [$video['course_id'], $video['id'], $video['slug']])}}"
                                                        class="learn-button">继续学习</a>
                                                 @elseif($video['charge'] === 0)
@@ -153,6 +156,7 @@
                                             @if($video['charge'] === 0)
                                                 <span class="free-label">免费</span>
                                             @endif
+                                            <span class="video-duration">已观看：{{progress_humans($progress, $video)}}</span>
                                             <span class="video-duration">{{duration_humans($video['duration'])}}</span>
                                             @if($isBuy)
                                                 <a href="{{route('video.show', [$video['course_id'], $video['id'], $video['slug']])}}"

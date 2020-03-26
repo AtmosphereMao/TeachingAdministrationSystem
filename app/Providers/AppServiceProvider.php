@@ -14,6 +14,7 @@ namespace App\Providers;
 use Carbon\Carbon;
 use App\Meedu\Setting;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 use App\Services\Base\Providers\BaseServiceRegisterProvider;
 use App\Services\Order\Providers\OrderServiceRegisterProvider;
@@ -43,6 +44,9 @@ class AppServiceProvider extends ServiceProvider
     {
         if ($this->app->environment(['dev', 'local'])) {
             $this->app->register(\Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);
+        }
+        if(env('IS_HTTPS')){
+            URL::forceScheme('https');
         }
 
         // 服务注册

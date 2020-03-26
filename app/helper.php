@@ -279,7 +279,7 @@ if (!function_exists('get_payments')) {
          */
         $configService = app()->make(\App\Services\Base\Interfaces\ConfigServiceInterface::class);
         $payments = collect($configService->getPayments())->filter(function ($payment) use ($scene) {
-            $enabled = $payment['enabled'] ?? false;
+            $enabled = $payment['enabled'] == 1;
             $isSet = $payment[$scene] ?? false;
 
             return $enabled && $isSet;
@@ -417,9 +417,23 @@ if (!function_exists('get_tencent_play_url')) {
 if (!function_exists('get_huawei_play_url')) {
     function get_huawei_play_url(string $vid)
     {
-        $obsSevice =app()->make(\App\Huawei\OBS::class);
-        $obs = $obsSevice->createOBS();
-        $resp = $obsSevice->getMetadataObs($vid, $obs);
+        $obsService =app()->make(\App\Huawei\OBS::class);
+        $obs = $obsService->createOBS();
+        $resp = $obsService->getMetadataObs($vid, $obs);
         return $resp['SignedUrl'];
+    }
+}
+
+if (!function_exists('progress_humans')) {
+    function progress_humans(array $progress,int $videoId,int $videoLong)
+    {
+        foreach ($progress as $item)
+        {
+            if($item['id']==$videoId)
+            {
+                return "已观看：".(int)round($item['progress']/$videoLong*100)."%";
+            }
+        }
+        return "未观看";
     }
 }

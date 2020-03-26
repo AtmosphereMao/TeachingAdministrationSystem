@@ -31,7 +31,8 @@ class OBS
         if($input['offset'] == 0){
             // init upload
 
-            $fileOriginal = substr($input['fileOriginal'], strrpos($input['fileOriginal'], '.'));
+            $fileOriginal = ".".substr(strrchr($input['fileOriginal'],'.'),1);
+            dd($fileOriginal);
             $resp = $obsClient->initiateMultipartUpload([
                 'Bucket' => env('HW_OBS_BUCKET'),
                 'Key' => 'uploadVideo/' . $input['md5Code'] . $fileOriginal,

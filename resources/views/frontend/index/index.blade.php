@@ -79,11 +79,10 @@
     <div class="container-fluid friend-link-box">
         <div class="container">
             <div class="row">
-                <div class="col-12 friend-link-box-logo">
+                <div class="col-3 friend-link-box-logo">
                     <img src="{{$gConfig['system']['logo']}}" height="37" alt="{{config('app.name')}}">
-                    课程栏目
                 </div>
-                <div class="col-12 friend-link-box-link">
+                <div class="col-9 friend-link-box-link" style="padding-top: 60px">
                     @foreach($links as $link)
                         <a href="{{$link['url']}}" target="_blank">{{$link['name']}}</a>
                     @endforeach

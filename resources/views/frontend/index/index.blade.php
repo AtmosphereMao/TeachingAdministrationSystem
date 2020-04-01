@@ -33,7 +33,7 @@
         </div>
     </div>
 
-    @foreach($banners as $i => $banner)
+    @forelse($banners as $i => $banner)
         <div class="container-fluid index-latest-banner {{$i % 2 === 0 ? 'bg-fff' : ''}}">
             <div class="container">
                 <div class="row">
@@ -66,21 +66,21 @@
                 </div>
             </div>
         </div>
-    @endforeach
-
-    <div class="container inspire">
-        <div class="row">
-            <div class="col-12">
-                <span>Banner</span>
+    @empty
+        <div class="container inspire">
+            <div class="row">
+                <div class="col-12">
+                    <span>Banner</span>
+                </div>
             </div>
         </div>
-    </div>
+    @endforelse
 
     <div class="container-fluid friend-link-box">
         <div class="container">
             <div class="row">
                 <div class="col-12 friend-link-box-logo">
-                    {{--<img src="{{$gConfig['system']['logo']}}" height="37" alt="{{config('app.name')}}">--}}
+                    <img src="{{$gConfig['system']['logo']}}" height="37" alt="{{config('app.name')}}">
                     课程栏目
                 </div>
                 <div class="col-12 friend-link-box-link">

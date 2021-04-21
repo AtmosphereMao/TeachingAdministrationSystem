@@ -39,3 +39,29 @@
 * 通用页面的登录/注册修改为邮箱操作
 * 手动支付，订单无法改为已支付
 * 0元订单已支付，但无法订阅
+
+
+## 运行方式
+```shell
+composer install --no-dev
+cp .env.example .env
+# 设置密钥
+php artisan key:generate
+php artisan jwt:secret
+```
+
+修改 `.env` 配置文件
+
+```
+# 创建上传目录软链接
+php artisan storage:link
+chmod -R  0777 storage
+# 安装数据表
+php artisan migrate
+# 安装系统权限
+php artisan install role
+php artisan install administrator
+php artisan install config
+# 安装锁文件
+php artisan install:lock
+```

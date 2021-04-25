@@ -9,9 +9,9 @@
                 <form action="" method="post">
                     @csrf
                     <div class="form-group">
-                        <label for="mobile">手机号</label>
-                        <input id="mobile" type="mobile" class="form-control" placeholder="手机号"
-                               name="mobile" value="{{ old('mobile') }}" required>
+                        <label for="email">邮箱</label>
+                        <input id="email" type="email" class="form-control" placeholder="邮箱"
+                               name="email" value="{{ old('email') }}" required>
                     </div>
                     <div class="form-group">
                         <label for="password">密码</label>
@@ -21,7 +21,7 @@
                     <div class="form-group">
                         <label><input type="checkbox"
                                       name="remember" {{ old('remember') ? 'checked' : '' }}> 记住我</label>
-                        <a href="{{ route('password.request') }}" class="float-right">忘记密码？</a>
+{{--                        <a href="{{ route('password.request') }}" class="float-right">忘记密码？</a>--}}
                     </div>
                     <div class="form-group mt-2">
                         <button class="btn btn-primary btn-block">登录</button>

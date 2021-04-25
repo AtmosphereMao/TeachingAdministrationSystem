@@ -67,7 +67,7 @@ class ApplicationInstallCommand extends Command
     {
         $super = AdministratorRole::whereSlug(config('meedu.administrator.super_slug'))->first();
         if (!$super) {
-            $this->warn('请先运行 [ php artisan install role ] 命令来初始化meedu的管理员权限数据。');
+            $this->warn('请先运行 [ php artisan install role ] 命令来初始化tasystem的管理员权限数据。');
 
             return;
         }
@@ -75,7 +75,7 @@ class ApplicationInstallCommand extends Command
         // 是否静默安装
         if (!$this->option('q')) {
             $name = '超级管理员';
-            $email = $this->ask('请输入邮箱(默认：meedu@meedu.meedu):', 'meedu@meedu.meedu');
+            $email = $this->ask('请输入邮箱(默认：tasystem@tasystem.tasystem):', 'tasystem@tasystem.tasystem');
             if (!$email) {
                 $this->warn('邮箱不能空');
 
@@ -90,12 +90,12 @@ class ApplicationInstallCommand extends Command
 
             $password = '';
             while ($password == '') {
-                $password = $this->ask('请输入密码(默认：meedu123):', 'meedu123');
+                $password = $this->ask('请输入密码(默认：tasystem123):', 'tasystem123');
             }
 
             $passwordRepeat = '';
             while ($passwordRepeat == '') {
-                $passwordRepeat = $this->ask('请再输入一次(默认：meedu123):', 'meedu123');
+                $passwordRepeat = $this->ask('请再输入一次(默认：tasystem123):', 'tasystem123');
             }
 
             if ($passwordRepeat != $password) {
@@ -105,8 +105,8 @@ class ApplicationInstallCommand extends Command
             }
         } else {
             $name = '超级管理员';
-            $email = 'meedu@meedu.meedu';
-            $password = 'meedu123';
+            $email = 'tasystem@tasystem.tasystem';
+            $password = 'tasystem123';
         }
 
         $administrator = new Administrator([

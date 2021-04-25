@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="https://g.alicdn.com/de/prismplayer/2.8.1/skins/default/aliplayer-min.css" />
-<video id="test" class="video-js vjs-big-play-centered vjs-fluid" controls preload="auto" poster="" data-setup="{}" style="margin-bottom: 10px;">
+<video id="test" class="video-js vjs-big-play-centered vjs-fluid" controls preload="auto" poster="" data-setup="{}" >
 </video>
 <script src="https://media-cache.huaweicloud.com/video/hwplayer/1.0.0/lib/flv-1.4.2.min.js"></script>
 <script src="https://media-cache.huaweicloud.com/video/hwplayer/1.0.0/dist/hwplayer.js?flvjs=true"></script>

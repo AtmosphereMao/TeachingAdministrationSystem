@@ -123,17 +123,17 @@ return [
         'index' => [
             'title' => 'MeEdu',
             'keywords' => '',
-            'description' => 'MeEdu是一套开源的，免费的在线视频点播系统。',
+            'description' => '',
         ],
         'course_list' => [
             'title' => '所有课程',
             'keywords' => '',
-            'description' => 'MeEdu是一套开源的，免费的在线视频点播系统。',
+            'description' => '',
         ],
         'role_list' => [
             'title' => 'VIP',
             'keywords' => '',
-            'description' => 'MeEdu是一套开源的，免费的在线视频点播系统。',
+            'description' => '',
         ],
     ],
 

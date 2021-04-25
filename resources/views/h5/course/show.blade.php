@@ -23,7 +23,7 @@
                     <div class="course-info">
                         <span class="user_count">已有 {{$course['user_count']}} 人订购</span><br>
                         <span class="user_count">课程浏览数：{{$logCount}} 次</span>
-                        <span class="price"><small>￥</small>{{$course['charge']}}</span>
+                        <span class="price">{!! $course['charge'] ? "<small>￥</small>".$course['charge'] : "免费" !!}</span>
                     </div>
                 </div>
             </div>
@@ -69,10 +69,12 @@
         </div>
     </div>
 
-    @if($isBuy)
-        <a href="{{route('member.course.buy', [$course['id']])}}" class="bottom-nav">购买课程</a>
+    @if(!$isBuy)
+        <a href="{{route('member.course.buy', [$course['id']])}}" class="bottom-nav">订阅课程</a>
     @else
         <a href="javascript:void(0)" class="bottom-nav">已订阅</a>
     @endif
+
+    @include('h5.components.recom_courses')
 
 @endsection

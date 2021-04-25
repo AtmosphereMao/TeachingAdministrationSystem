@@ -13,7 +13,12 @@
                         <input id="nick_name" type="text" class="form-control" placeholder="昵称"
                                name="nick_name" value="{{ old('nick_name') }}" required>
                     </div>
-                    @include('frontend.components.mobile', ['smsCaptchaKey' => 'register'])
+                    <div class="form-group">
+                        <label for="email">邮箱</label>
+                        <input id="email" type="text" class="form-control" placeholder="邮箱"
+                               name="email" value="{{ old('email') }}" required>
+                    </div>
+                    {{--@include('frontend.components.mobile', ['smsCaptchaKey' => 'register'])--}}
                     <div class="form-group">
                         <label for="password">密码</label>
                         <input id="password" type="password" class="form-control" placeholder="密码"

@@ -11,28 +11,27 @@
 @section('content')
 
     @include('h5.components.topbar', ['back' => route('course.show', [$course['id'], $course['slug']]), 'title' => '详情'])
-
-    <div class="video-play-box">
+    <link href="https://unpkg.com/video.js/dist/video-js.css" rel="stylesheet">
+    <script src="https://unpkg.com/video.js/dist/video.js"></script>
+    <div class="video-play-box" style="height: 100%">
         @if($user)
             @if($canSeeVideo)
-                <div class="box-shadow1">
                     @if($video['aliyun_video_id'])
                         @include('h5.components.player.aliyun', ['video' => $video])
                     @elseif($video['tencent_video_id'])
                         @include('h5.components.player.tencent', ['video' => $video])
                     @else
-                        @include('h5.components.player.aliyunSimple', ['video' => $video])
+                        @include('h5.components.player.huawei', ['video' => $video])
                     @endif
-                </div>
             @else
                 <div style="margin-top: 60px;">
                     <a href="{{ route('member.course.buy', [$course['id']]) }}"
-                       class="btn btn-primary mt-1">购买课程</a>
+                       class="btn btn-primary mt-1">订阅课程</a>
                 </div>
             @endif
         @else
             <div style="margin-top: 60px;">
-                <a class="btn btn-primary" href="{{route('login')}}">登录</a>
+                <a class="btn btn-primary" href="{{route('login')}}" style="margin-bottom: 20%;">登录</a>
             </div>
         @endif
     </div>
@@ -46,7 +45,7 @@
         </div>
     </div>
 
-    <div class="page-chapter" style="display: block">
+    <div class="page-chapter mb-5" style="display: block;">
         @if($chapters)
             @foreach($chapters as $chapter)
                 <div class="chapter-title"><span>{{$chapter['title']}}</span></div>
@@ -66,5 +65,7 @@
             </div>
         @endif
     </div>
+
+    @include("h5.components.recom_courses")
 
 @endsection

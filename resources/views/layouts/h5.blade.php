@@ -8,7 +8,13 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="keywords" content="{{$keywords ?? ''}}">
     <meta name="description" content="{{$description ?? ''}}">
-    <title>{{$title ?? 'MeEdu'}}</title>
+    <title>
+        @hasSection('title')
+            @yield('title')
+        @else
+            {{env('APP_NAME')}}
+        @endif
+    </title>
     <link rel="stylesheet" href="{{asset('/h5/css/app.css')}}">
     <script src="{{asset('/h5/js/app.js')}}"></script>
     @yield('css')

@@ -1,5 +1,5 @@
 @extends('layouts.h5')
-
+@section('title', "全部课程")
 @section('content')
 
     <div class="container-fluid bg-fff mb-5">

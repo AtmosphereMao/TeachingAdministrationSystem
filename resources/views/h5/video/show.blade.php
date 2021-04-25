@@ -1,5 +1,5 @@
 @extends('layouts.h5')
-
+@section('title', $course['title'].' - '.$video['title'])
 @section('css')
     <style>
         body {

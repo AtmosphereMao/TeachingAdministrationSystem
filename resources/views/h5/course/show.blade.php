@@ -5,6 +5,53 @@
         body {
             padding-top: 40px;
         }
+        .comment-box {
+            width: 100%;
+            height: auto;
+            float: left;
+            margin-bottom: 30px;
+            margin-top: 10px;
+        }
+        .comment-input-box{
+            width: 100%;
+            height: auto;
+            float: left;
+            background-color: #fff;
+            padding: 30px;
+            -webkit-box-shadow: 0 4px 8px 0 #e5e5e5;
+            box-shadow: 0 4px 8px 0 #e5e5e5;
+            border-radius: 8px;
+        }
+        .comment-list-item{
+            width: 100%;
+            height: auto;
+            float: left;
+            margin-bottom: 10px;
+            background: #fff;
+            -webkit-box-shadow: 0 4px 8px 0 #e5e5e5;
+            box-shadow: 0 4px 8px 0 #e5e5e5;
+            border-radius: 8px;
+            padding: 20px 30px;
+        }
+        .comment-user-avatar img{
+            border-radius: 35px;
+        }
+        .comment-user-nickname{
+            width: 100%;
+            height: auto;
+            float: left;
+            font-size: 14px;
+            font-weight: 600;
+            color: #999;
+            line-height: 14px;
+            margin-bottom: 15px;
+        }
+        .comment-createAt{
+            font-size: 12px;
+            font-weight: 400;
+            color: #ccc;
+            line-height: 12px;
+        }
     </style>
 @endsection
 
@@ -31,11 +78,14 @@
     </div>
 
     <div class="course-detail-menu">
-        <div class="course-menu-item active" data-page="page-desc">
+        <div class="course-menu-item active" style="width: 33%;" data-page="page-desc">
             <span>课程介绍</span>
         </div>
-        <div class="course-menu-item" data-page="page-chapter">
+        <div class="course-menu-item" style="width: 33%;" data-page="page-chapter">
             <span>课程目录</span>
+        </div>
+        <div class="course-menu-item" style="width: 33%;" data-page="page-comment">
+            <span>讨论区</span>
         </div>
     </div>
 
@@ -67,7 +117,49 @@
                 </div>
             @endif
         </div>
+        <div class="page-comment" style="display: none">
+            <div class="col-12">
+                <div class="comment-box">
+                    <div class="comment-input-box">
+                        @if(\Illuminate\Support\Facades\Auth::check())
+                        <textarea name="content" placeholder="请输入评论内容" class="form-control" rows="3"></textarea>
+                        <button type="button" data-url="{{route('ajax.course.comment', [$course['id']])}}"
+                                data-login="{{$user ? 1 : 0}}" data-input="content" class="comment-button btn btn-info float-right mt-3">评论
+                        </button>
+                        @else
+                        <p>登陆后即可评论</p>
+                        <button type="button"  class="btn btn-info" onclick="javascript:window.location.href='{{route('login')}}'">登录
+                        </button>
+                        @endif
+                    </div>
+                </div>
+
+                <div class="comment-list-box">
+                    @forelse($comments as $commentItem)
+                        <div class="comment-list-item">
+                            <div class="comment-user-avatar">
+                                <img src="{{$commentUsers[$commentItem['user_id']]['avatar']}}" width="50"
+                                     height="50">
+                            </div>
+                            <div class="comment-content-box">
+                                <div class="comment-user-nickname">{{$commentUsers[$commentItem['user_id']]['nick_name']}}</div>
+                                <div class="comment-content">
+                                    {!! $commentItem['render_content'] !!}
+                                </div>
+                                <div class="comment-info">
+                                    <span class="comment-createAt">{{\Carbon\Carbon::parse($commentItem['created_at'])->diffForHumans()}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    @empty
+                        @include('frontend.components.none')
+                    @endforelse
+                </div>
+            </div>
+        </div>
     </div>
+    <script src="{{asset('frontend/js/frontend.js')}}">
+    </script>
 
     @if(!$isBuy)
         <a href="{{route('member.course.buy', [$course['id']])}}" class="bottom-nav">订阅课程</a>

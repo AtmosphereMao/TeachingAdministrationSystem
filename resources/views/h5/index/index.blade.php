@@ -3,6 +3,22 @@
 @section('css')
     <link crossorigin="anonymous" integrity="sha384-K6LrEaceM4QP87RzJ7R4CDXcFN4cFW/A5Q7/fEp/92c2WV+woVw9S9zKDO23sNS+"
           href="https://lib.baomitu.com/Swiper/4.5.0/css/swiper.min.css" rel="stylesheet">
+    <style>
+    .announcement-box{
+        width: 100%;
+        height: 52px;
+        float: left;
+        background: #fff9d7;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 52px;
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+    .announcement-box a{
+        color: #de7a0b;
+    }
+    </style>
 @endsection
 
 @section('content')
@@ -11,13 +27,17 @@
         <div class="swiper-wrapper">
             @foreach($sliders as $slider)
                 <a class="swiper-slide" href="{{$slider['url']}}">
-                    <img src="{{$slider['thumb']}}" width="100%" height="130">
+                    <img src="{{$slider['thumb']}}" width="100%" height="200">
                 </a>
             @endforeach
         </div>
         <div class="swiper-pagination"></div>
     </div>
-
+    @if($gAnnouncement)
+        <div class="announcement-box">
+            <a href="{{route('announcement.show', [$gAnnouncement['id']])}}">{{$gAnnouncement['title']}}</a>
+        </div>
+    @endif
     @foreach($banners as $banner)
         <div class="container-fluid bg-fff mt-10">
             <div class="row">

@@ -1,12 +1,11 @@
 {
-    "name": "qsnh/meedu",
+    "name": "AtmosphereMao/TeachingAdministrationSystem",
     "description": "A video system about edu.",
     "keywords": [
         "video",
         "edu",
         "laravel"
     ],
-    "homepage": "https://meedu.vip",
     "license": "MIT",
     "type": "project",
     "require": {

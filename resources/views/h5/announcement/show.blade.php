@@ -5,7 +5,7 @@
     <div class="container my-5">
         <div class="row">
             <div class="col-12">
-                <div class="w-100 float-left bg-fff br-8">
+                <div class="w-100 float-left bg-fff br-8 p-3">
                     <div class="announcement-title">
                         <h2>{{$a['title']}}</h2>
                         <p class="announcement-intro">

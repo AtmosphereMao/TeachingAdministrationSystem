@@ -23,7 +23,7 @@
             player.play();
             // 使用事件监听
             player.on("firstplay",function () {
-
+                player.currentTime({{$progress['progress']}});
             })
 
             player.on('pause', function () {

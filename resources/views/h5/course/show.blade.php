@@ -112,7 +112,14 @@
                 <div class="chapter-list-box">
                     @foreach($videos[0] ?? [] as $video)
                         <a href="{{route('video.show', [$video['course_id'], $video['id'], $video['slug']])}}"
-                           class="chapter-list-item"><span>{{$video['title']}}</span></a>
+                           class="chapter-list-item"><span>{{$video['title']}}</span>
+                            <span class="video-duration float-right" style="margin-right: 10px;">{{duration_humans($video['duration'])}}</span>
+                            @if($isBuy || $video['charge'] === 0)
+                                <span class="video-duration float-right"style="margin-right: 10px;">{{$progressData = progress_humans($progress, $video['id'], $video['duration'])}}</span>
+                            @endif
+                        </a>
+
+                        <br>
                     @endforeach
                 </div>
             @endif

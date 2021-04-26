@@ -30,7 +30,7 @@
                                 @elseif($video['tencent_video_id'])
                                     @include('frontend.components.player.tencent', ['video' => $video])
                                 @elseif($video['huawei_video_id'])
-                                    @include('frontend.components.player.huawei', ['video' => $video])
+                                    @include('frontend.components.player.huawei', ['video' => $video, 'progress' => $progress[search_2DArray_key($progress, 'video_id', $video['id'])] ?? ['progress'=>0]])
                                 @else
                                     @include('frontend.components.player.huaweiSimple', ['video' => $video])
                                 @endif
@@ -122,7 +122,10 @@
                                             @if($videoItem['charge'] === 0)
                                                 <span class="free-label">免费</span>
                                             @endif
-                                            <span class="video-duration">{{duration_humans($video['duration'])}}</span>
+                                            <span class="video-duration float-right" style="margin-right: 10px;">{{duration_humans($videoItem['duration'])}}</span>
+                                            @if($isBuy || $videoItem['charge'] === 0)
+                                                <span class="video-duration float-right"style="margin-right: 10px;">{{$progressData = progress_humans($progress, $videoItem['id'], $videoItem['duration'])}}</span>
+                                            @endif
                                             <a href="{{route('video.show', [$videoItem['course_id'], $videoItem['id'], $videoItem['slug']])}}"
                                                class="learn-button">开始学习</a>
                                         </div>

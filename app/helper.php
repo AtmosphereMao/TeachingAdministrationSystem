@@ -437,3 +437,10 @@ if (!function_exists('progress_humans')) {
         return "未观看";
     }
 }
+
+if(!function_exists('search_2DArray_key')) {
+    function search_2DArray_key(array $arr, string $key, string $value)
+    {
+        return array_search($value, array_column($arr, $key));
+    }
+}

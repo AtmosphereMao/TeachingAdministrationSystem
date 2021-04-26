@@ -68,12 +68,12 @@
                     @elseif($video['tencent_video_id'])
                         @include('h5.components.player.tencent', ['video' => $video])
                     @else
-                        @include('h5.components.player.huawei', ['video' => $video])
+                        @include('h5.components.player.huawei', ['video' => $video, 'progress' => $progress[search_2DArray_key($progress, 'video_id', $video['id'])] ?? ['progress'=>0]])
                     @endif
             @else
                 <div style="margin-top: 60px;">
                     <a href="{{ route('member.course.buy', [$course['id']]) }}"
-                       class="btn btn-primary mt-1">订阅课程</a>
+                       class="btn btn-primary mt-1" style="margin-bottom: 20%;">订阅课程</a>
                 </div>
             @endif
         @else
@@ -107,7 +107,12 @@
             <div class="chapter-list-box">
                 @foreach($videos[0] ?? [] as $videoItem)
                     <a href="{{route('video.show', [$videoItem['course_id'], $videoItem['id'], $videoItem['slug']])}}"
-                       class="chapter-list-item {{$video['id'] === $videoItem['id'] ? 'active' : ''}}"><span>{{$videoItem['title']}}</span></a>
+                       class="chapter-list-item {{$video['id'] === $videoItem['id'] ? 'active' : ''}}"><span>{{$videoItem['title']}}</span>
+                        <span class="video-duration float-right" style="margin-right: 10px;">{{duration_humans($videoItem['duration'])}}</span>
+                        @if($isBuy || $videoItem['charge'] === 0)
+                            <span class="video-duration float-right"style="margin-right: 10px;">{{$progressData = progress_humans($progress, $videoItem['id'], $videoItem['duration'])}}</span>
+                        @endif
+                    </a>
                 @endforeach
             </div>
         @endif

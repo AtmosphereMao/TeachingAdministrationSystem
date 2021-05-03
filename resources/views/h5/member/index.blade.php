@@ -1,12 +1,41 @@
 @extends('layouts.h5')
-
+@section('css')
+    <style>
+        .auth-box{
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1111;
+            background-color: rgba(0,0,0,.5);
+            display: none;
+        }
+        #auth-box-content{
+            margin-top: 200px;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+        }
+    </style>
 @section('content')
 
+    <script src="{{asset('frontend/js/frontend.js')}}"></script>
+    <div class="auth-box">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-10" id="auth-box-content">
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="container-fluid bg-fff">
         <div class="row">
             <div class="col-12">
                 <div class="user-avatar">
-                    <img src="{{$user['avatar']}}" width="80" height="80">
+                    <a href="javascript:void(0);" onclick="showAuthBox('avatar-change')" class="avatar-change-button">
+                        <img src="{{$user['avatar']}}" width="80" height="80">
+                    </a>
                 </div>
                 <div class="user-nickname">
                     {{$user['nick_name']}}
@@ -95,7 +124,26 @@
             </div>
         </div>
     </div>
-
+    <script id="avatar-change" type="text/html">
+        <form class="login-box" action="{{route('ajax.avatar.change')}}" method="post">
+            <div class="login-box-title" style="margin-bottom: 30px;">
+                <span class="title">更换头像</span>
+                <img src="/images/close.png" width="24" height="24" class="close-auth-box float-right">
+            </div>
+            <div class="alert alert-primary">
+                <p class="mb-0">1.支持png,jpg,gif图片格式。</p>
+                <p class="mb-0">2.图片大小不能超过1MB。</p>
+            </div>
+            <div class="form-group">
+                <label>选择头像文件</label><br>
+                <input type="file" name="file">
+            </div>
+            <div class="form-group auth-box-errors"></div>
+            <div class="form-group mb-0">
+                <button type="button" class="btn btn-primary btn-block avatar-change-button">更换头像</button>
+            </div>
+        </form>
+    </script>
     @include('h5.components.navbar')
 
 @endsection

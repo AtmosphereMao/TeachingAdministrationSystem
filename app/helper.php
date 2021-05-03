@@ -416,7 +416,7 @@ if (!function_exists('get_huawei_play_url')) {
     {
         $obsService =app()->make(\App\Huawei\OBS::class);
         $obs = $obsService->createOBS();
-        $resp = $obsService->getMetadataObs($vid, $obs);
+        $resp = $obsService->getMetadataObs($vid, $obs, 'uploadVideo/');
         return $resp['SignedUrl'];
     }
 }

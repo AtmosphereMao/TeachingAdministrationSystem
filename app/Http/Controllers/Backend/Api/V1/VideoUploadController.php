@@ -40,9 +40,9 @@ class VideoUploadController extends BaseController
         if($input['flag']) {
 //            dd(json_encode(['PartNumber'=>'1', 'ETag'=>'1']));
             $parts = json_decode($request->input('parts'),true);
-            $signature = $obsService->compleleUploadObsBlock($parts,$input,$obs);
+            $signature = $obsService->compleleUploadObsBlock($parts,$input,$obs,'uploadVideo/');
         }else   // 未完成继续上传
-            $signature = $obsService->uploadObsBlock($input, $obs);
+            $signature = $obsService->uploadObsBlock($input, $obs, 'uploadVideo/');
         return $this->successData(compact('signature'));
     }
 
@@ -54,7 +54,7 @@ class VideoUploadController extends BaseController
             'filename' => $request->file('filename'),   // 文件
             'md5Code' => $request->input('md5Code'),    // MD5 用于确认同一文件
           ];
-        $response = $obsService->uploadObs($input, $obs);
+        $response = $obsService->uploadObs($input, $obs, 'uploadVideo/');
         $signature = ['ETag'=>$response['ETag'],'ObjectURL'=>$response['ObjectURL']];
         return $this->successData(compact('signature'));
     }
@@ -66,7 +66,7 @@ class VideoUploadController extends BaseController
         $input = [
             'md5Code' => $request->input('md5Code'),    // MD5 用于确认同一文件
         ];
-        $response = $obsService->cancelUploadObsBlock($input, $obs);
+        $response = $obsService->cancelUploadObsBlock($input, $obs, 'uploadVideo/');
         return $this->successData(compact('response'));
     }
     public function aliyunCreateVideoToken(Request $request)

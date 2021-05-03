@@ -69,7 +69,8 @@ class CourseRequest extends BaseRequest
             'published_at' => $this->input('published_at'),
             'is_show' => $this->input('is_show', Course::SHOW_NO),
             'is_rec' => $this->input('is_rec', Course::REC_NO),
-
+            'created_at' => date('Y-m-d H:i:s', time()),
+            'updated_at' => date('Y-m-d H:i:s', time()),
         ];
 
 

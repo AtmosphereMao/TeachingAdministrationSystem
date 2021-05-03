@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\Frontend\BaseRequest;
 use App\Services\Base\Services\ConfigService;
 use App\Services\Base\Interfaces\ConfigServiceInterface;
+use App\Huawei\OBS;
 
 class AvatarChangeRequest extends BaseRequest
 {
@@ -36,12 +37,17 @@ class AvatarChangeRequest extends BaseRequest
         /**
          * @var ConfigService
          */
-        $configService = app()->make(ConfigServiceInterface::class);
 
         $file = $this->file('file');
-        $path = $file->store('/avatar');
-        $url = Storage::disk($configService->getDefaultStorageDisk())->url($path);
+        $obsService = app()->make(OBS::class);
+        $obs = $obsService->createOBS();
+        $input = [
+            'filename' => $file,
+            'md5Code' => md5($file)
+        ];
+        $response = $obsService->uploadObs($input, $obs, 'uploadAvatar/');
 
-        return compact('path', 'url');
+
+        return ['url' => $response['ObjectURL']];
     }
 }

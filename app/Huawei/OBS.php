@@ -16,6 +16,7 @@ use TencentCloud\Dayu\V20180709\Models\DDoSAlarmThreshold;
 
 class OBS
 {
+    protected $store_path = 'store/';
     public function createOBS()
     {
         // 创建ObsClient实例
@@ -26,14 +27,14 @@ class OBS
         ]);
     }
 
-    public function uploadObsBlock(array $input, ObsClient $obsClient)
+    public function uploadObsBlock(array $input, ObsClient $obsClient, string $save_path = 'store/')
     {
         if($input['offset'] == 0){
             // init upload
             $fileOriginal = substr($input['fileOriginal'], strrpos($input['fileOriginal'], '.'));
             $resp = $obsClient->initiateMultipartUpload([
                 'Bucket' => env('HW_OBS_BUCKET'),
-                'Key' => 'uploadVideo/' . $input['md5Code'] . $fileOriginal,
+                'Key' => $this->store_path . $save_path . $input['md5Code'] . $fileOriginal,
                 'ContentType' => 'text/plain',
                 'Metadata' => ['property' => $input['md5Code']]
             ]);
@@ -46,7 +47,7 @@ class OBS
         }
         $resp = $obsClient->uploadPart([
             'Bucket' => env('HW_OBS_BUCKET'),
-            'Key' => 'uploadVideo/' . $input['md5Code'] . $fileOriginal,
+            'Key' => $this->store_path . $save_path . $input['md5Code'] . $fileOriginal,
             // 设置分段号，范围是1~10000
             'PartNumber' => $input['blockNum'],
             // 设置Upload ID
@@ -62,7 +63,7 @@ class OBS
         return ['PartNumber'=>$input['blockNum'], 'ETag'=>$resp['ETag']];
     }
 
-    public function compleleUploadObsBlock(array $parts, array $input,ObsClient $obsClient){
+    public function compleleUploadObsBlock(array $parts, array $input,ObsClient $obsClient, string $save_path = 'store/'){
 
         $VideoUploadId = VideoUploadId::query()->where('md5_code',$input['md5Code'])->first();
         $upload_id = $VideoUploadId->upload_id;
@@ -70,7 +71,7 @@ class OBS
 
         $resp = $obsClient->uploadPart([
             'Bucket' => env('HW_OBS_BUCKET'),
-            'Key' => 'uploadVideo/' . $input['md5Code'] . $fileOriginal,
+            'Key' => $this->store_path . $save_path . $input['md5Code'] . $fileOriginal,
             // 设置分段号，范围是1~10000
             'PartNumber' => $input['blockNum'],
             // 设置Upload ID
@@ -85,7 +86,7 @@ class OBS
         $parts[count($parts)] = ['PartNumber'=>$input['blockNum'], 'ETag'=>$resp['ETag']];
         $resp = $obsClient->completeMultipartUpload([
             'Bucket' => env('HW_OBS_BUCKET'),
-            'Key' => 'uploadVideo/' . $input['md5Code'] . $fileOriginal,
+            'Key' => $this->store_path . $save_path . $input['md5Code'] . $fileOriginal,
                 // 设置Upload ID
             'UploadId' => $upload_id,
             'Parts' => $parts
@@ -94,7 +95,7 @@ class OBS
         return $resp;
     }
 
-    public function cancelUploadObsBlock(array $input, ObsClient $obsClient)
+    public function cancelUploadObsBlock(array $input, ObsClient $obsClient, string $save_path = 'store/')
     {
         $VideoUploadId = VideoUploadId::query()->where('md5_code',$input['md5Code'])->first();
         $upload_id = $VideoUploadId->upload_id;
@@ -102,29 +103,29 @@ class OBS
 
         $resp = $obsClient->abortMultipartUpload([
             'Bucket' => env('HW_OBS_BUCKET'),
-            'Key' => 'uploadVideo/' . $input['md5Code'] . $fileOriginal,
+            'Key' => $this->store_path . $save_path . $input['md5Code'] . $fileOriginal,
             // 设置Upload ID
             'UploadId' => $upload_id
         ]);
         return $resp;
     }
 
-    public function uploadObs(array $input, ObsClient $obsClient)
+    public function uploadObs(array $input, ObsClient $obsClient, string $save_path = 'store/')
     {
         $fix = ".".$input['filename']->getClientOriginalExtension();
         $resp = $obsClient->putObject( [
             'Bucket' =>  env('HW_OBS_BUCKET'),
-            'Key' => 'uploadVideo/' .$input['md5Code'].$fix,
+            'Key' => $this->store_path . $save_path . $input['md5Code'] . $fix,
             'SourceFile' => $input['filename']
         ] );
         return $resp;
     }
 
-    public function getMetadataObs(string $md5code, ObsClient $obsClient)
+    public function getMetadataObs(string $md5code, ObsClient $obsClient, string $save_path = 'store/')
     {
         $resp = $obsClient->listObjects( [
             'Bucket' =>  env('HW_OBS_BUCKET'),
-            'Prefix' => 'uploadVideo/'.$md5code
+            'Prefix' => $this->store_path . $save_path . $md5code
         ] );
         $resp = $obsClient->createV4SignedUrl([     // 创建临时授权URL
             'Expires' => env('HW_OBS_Expires'), // 授权时长4小时

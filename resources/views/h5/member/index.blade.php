@@ -98,6 +98,18 @@
         <div class="row">
             <div class="col-12">
                 <div class="user-menu-box">
+                    <a href="{{route('member.messages')}}" class="user-menu-item">
+                        <img src="/images/icons/message.png" width="20" height="20">
+                        <span class="title">我的消息</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid bg-fff border-top py-3">
+        <div class="row">
+            <div class="col-12">
+                <div class="user-menu-box">
                     <a href="{{route('member.password_reset')}}" class="user-menu-item">
                         <img src="/h5/images/icons/me.png" width="20" height="20">
                         <span class="title">修改密码</span>

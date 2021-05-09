@@ -77,7 +77,7 @@ class RegisterController extends BaseController
         $res = false;
         if($user && strtotime($user->activity_expire)>time())
         {
-            $user->is_activity = 1;
+            $user->is_activity = 1; $user->is_active = 1;
             $res = $user->save();
         }
         return view('frontend.auth.activityres',['res'=>$res]);
